@@ -5,7 +5,6 @@ const ItemSummary = ({ item }: { item: ShoppingItem }) => {
     return (
         <div className="item-list section">
             <div className="card z-depth-0 item-summary">
-                <p>ID: {item.id}</p>
                 <span className="card-title">{item.title}</span>
                 <p>{item.quantity}</p>
                 <p>{item.createdBy}</p>
