@@ -1,14 +1,15 @@
 import React from 'react'
-import ItemList from './ItemList';
+import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
 import ShoppingItem from "../../models/ShoppingItem";
+import ItemCreate from '../shoppingitem/ItemCreate';
 
-const Dashboard = (props: any) => {
-    const { items }: { items: ShoppingItem[] } = props
+const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
 
     return (
         <div className="dashboard container">
             <ItemList items={items} />
+            <ItemCreate />
         </div>
 
     )

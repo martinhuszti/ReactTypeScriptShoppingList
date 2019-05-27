@@ -9,9 +9,7 @@ const SignIn = () => {
         alert(`${email}`)
     }
 
-    const handleChange = (evt:  any) => {
 
-    }
 
     return (
         <div>
