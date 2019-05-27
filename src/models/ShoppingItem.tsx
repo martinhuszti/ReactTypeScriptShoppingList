@@ -2,11 +2,11 @@ export default class ShoppingItem {
 
 
     constructor(
-        public id: string = "defaultid",
-        public title: string = "defaul title",
-        public description: string = "default desc",
-        public createdBy: string = "default madeBy",
-        public quantity: number = 2,
+        public id: string = "",
+        public title: string = "",
+        public description: string = "",
+        public createdBy: string = "",
+        public quantity: number = 0,
         public createdDate: Date = new Date()
     ) { }
 }

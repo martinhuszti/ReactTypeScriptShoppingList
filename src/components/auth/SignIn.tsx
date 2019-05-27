@@ -6,7 +6,7 @@ const SignIn = () => {
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        alert(`${email}`)
+        alert(`${email} ${password}`)
     }
 
 

@@ -5,7 +5,7 @@ import { createItem } from '../../store/actions/shoppingItemActions';
 
 const ItemCreate = (props: any) => {
 
-    const [item, setItem] = useState(new ShoppingItem);
+    const [item] = useState(new ShoppingItem());
 
 
     const handleSubmit = (evt: any) => {

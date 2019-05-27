@@ -1,8 +1,10 @@
 import React from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase'
 import ShoppingItem from "../../models/ShoppingItem";
 import ItemCreate from '../shoppingitem/ItemCreate';
+import { compose } from 'redux';
 
 const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
 
@@ -21,4 +23,9 @@ const mapStateToProps = (state: any) => {
     }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default compose<any>
+    (connect(mapStateToProps),
+        firestoreConnect([{
+            collection: 'shopping_items'
+        }])
+    )(Dashboard);
