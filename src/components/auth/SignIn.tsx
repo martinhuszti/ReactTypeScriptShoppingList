@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, Dispatch } from 'react'
+import { connect, DispatchProp } from 'react-redux';
+import { signIn } from '../../store/actions/authActions';
 
-const SignIn = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
+const SignIn = (props: any) => {
+    const credTemplate = { email: "", password: "" }
+    const [cred] = useState(credTemplate);
+    const { authError } = props
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        alert(`${email} ${password}`)
+        props.signIn(cred)
     }
-
 
 
     return (
@@ -18,16 +19,16 @@ const SignIn = () => {
                     <h5 className="grey-text text-darken-3">Sign In</h5>
                     <div className="input-field">
                         <label htmlFor="email">Email</label>
-                        <input type="email" id="email" onChange={e => setEmail(e.target.value)} />
+                        <input type="email" id="email" onChange={e => cred.email = (e.target.value)} />
                     </div>
                     <div className="input-field">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
+                        <input type="password" id="password" onChange={e => cred.password = (e.target.value)} />
                     </div>
                     <div className="input-field">
                         <button className="btn pink lighten-1 z-depth-0">Login</button>
                     </div>
-
+                    {authError ? <p>{authError}</p> : null}
                 </form>
             </div>
 
@@ -35,4 +36,16 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+const mapStateToProps = (state: any) => {
+    return {
+        authError: state.auth.authError
+    }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        signIn: (cred: any) => dispatch(signIn(cred))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

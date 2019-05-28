@@ -19,7 +19,6 @@ const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
 }
 
 const mapStateToProps = (state: any) => {
-    console.log(state)
     return {
         items: state.firestore.ordered.shopping_items
     }

@@ -2,7 +2,7 @@ export default class ShoppingItem {
 
 
     constructor(
-        public id: string = "",
+        public id: string,
         public title: string = "",
         public description: string = "",
         public createdBy: string = "",

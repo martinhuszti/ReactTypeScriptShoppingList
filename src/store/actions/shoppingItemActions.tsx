@@ -2,7 +2,7 @@ import ShoppingItem from "../../models/ShoppingItem";
 
 export const createItem = (item: ShoppingItem) => {
     return (dispatch: any, getState: any,
-        { getFirestore, getFirebase }: any) => {
+        { getFirestore }: any) => {
 
 
         const firestore = getFirestore()
