@@ -5,7 +5,6 @@ import { firestoreConnect } from 'react-redux-firebase'
 import ShoppingItem from "../../models/ShoppingItem";
 import ItemCreate from '../shoppingitem/ItemCreate';
 import { compose } from 'redux';
-import { stat } from 'fs';
 
 const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
 

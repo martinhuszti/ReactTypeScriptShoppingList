@@ -17,7 +17,6 @@ const Navbar = () => {
 }
 
 const mapStateToProps = (state: any) => {
-    console.log(state)
     return {
 
     }
