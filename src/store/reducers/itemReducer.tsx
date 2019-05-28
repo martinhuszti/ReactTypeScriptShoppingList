@@ -2,9 +2,9 @@ import ShoppingItem from "../../models/ShoppingItem";
 
 const initState = {
     items: [
-        new ShoppingItem("1"),
-        new ShoppingItem("2"),
-        new ShoppingItem("3"),
+        new ShoppingItem(),
+        new ShoppingItem(),
+        new ShoppingItem(),
     ]
 }
 
