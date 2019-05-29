@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
-import { isLoaded } from 'react-redux-firebase';
 
 const Navbar = (props: any) => {
     const { auth } = props

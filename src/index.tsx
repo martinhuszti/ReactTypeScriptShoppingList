@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, compose, applyMiddleware, } from 'redux'
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux'
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
+import { ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase'
 import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-firestore' // <- needed if using firestore
 import firebaseConfig from './config/firebaseConfig'
 import thunk from 'redux-thunk'
@@ -29,14 +29,16 @@ const rrfProps = {
     config: rrfConfig,
     dispatch: store.dispatch,
     createFirestoreInstance,
-    attachAuthIsReady: true
 }
 
-ReactDOM.render(
-    <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-            <App />
-        </ReactReduxFirebaseProvider>
-    </Provider>,
-    document.getElementById('root') as HTMLElement);
-serviceWorker.unregister();
+if (isLoaded(firebaseConfig.auth)) {
+    ReactDOM.render(
+        <Provider store={store}>
+            <ReactReduxFirebaseProvider {...rrfProps}>
+                <App />
+            </ReactReduxFirebaseProvider>
+        </Provider>,
+        document.getElementById('root') as HTMLElement);
+    serviceWorker.unregister();
+}
+
