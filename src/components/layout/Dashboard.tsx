@@ -5,9 +5,13 @@ import { firestoreConnect } from 'react-redux-firebase'
 import ShoppingItem from "../../models/ShoppingItem";
 import ItemCreate from '../shoppingitem/ItemCreate';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
-const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
+const Dashboard = (props: any) => {
+    const { items }: { items: ShoppingItem[] } = props
+    const { auth } = props
 
+    if (!auth.uid) return <Redirect to='/signin' />
     return (
         <div className="dashboard container">
             <ItemList items={items} />
@@ -19,7 +23,8 @@ const Dashboard = ({ items }: { items: ShoppingItem[] }) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        items: state.firestore.ordered.shopping_items
+        items: state.firestore.ordered.shopping_items,
+        auth: state.firebase.auth,
     }
 }
 

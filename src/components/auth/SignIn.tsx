@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
 
 const SignIn = (props: any) => {
-    const credTemplate = { email: "", password: "" }
-    const [cred] = useState(credTemplate);
-    const { authError } = props
+
+    const [cred] = useState({ email: "", password: "" });
+    const { authError, auth } = props
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         props.signIn(cred)
     }
 
+    if (auth.uid) return <Redirect to='/' />
 
     return (
         <div>
@@ -40,7 +42,8 @@ const SignIn = (props: any) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        authError: state.auth.authError
+        authError: state.auth.authError,
+        auth: state.firebase.auth
     }
 }
 
