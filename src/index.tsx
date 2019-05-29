@@ -11,9 +11,6 @@ import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-fir
 import firebaseConfig from './config/firebaseConfig'
 import thunk from 'redux-thunk'
 
-
-
-
 const store = createStore(
     rootReducer,
     compose(
@@ -21,6 +18,7 @@ const store = createStore(
             thunk.withExtraArgument({ getFirestore })
         ),
         reduxFirestore(firebaseConfig),
+
     ))
 const rrfConfig = {
     userProfile: 'users',
@@ -30,9 +28,9 @@ const rrfProps = {
     firebase: firebaseConfig,
     config: rrfConfig,
     dispatch: store.dispatch,
-    createFirestoreInstance
+    createFirestoreInstance,
+    attachAuthIsReady: true
 }
-
 
 ReactDOM.render(
     <Provider store={store}>
