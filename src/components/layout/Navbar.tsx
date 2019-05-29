@@ -8,25 +8,14 @@ import { isLoaded } from 'react-redux-firebase';
 const Navbar = (props: any) => {
     const { auth } = props
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />
-    if (isLoaded(auth))
-        return (
-            <nav className="nav-wrapper orange ">
-                <div className="container">
-                    <Link to='/' className="brand-logo">Bevásárlólista</Link>
-                    {links}
-                </div>
-            </nav>
-        )
     return (
         <nav className="nav-wrapper orange ">
             <div className="container">
                 <Link to='/' className="brand-logo">Bevásárlólista</Link>
+                {links}
             </div>
         </nav>
     )
-
-
-
 }
 
 const mapStateToProps = (state: any) => {
