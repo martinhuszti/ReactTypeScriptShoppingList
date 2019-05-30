@@ -1,0 +1,111 @@
+[debug] [2019-05-30T14:18:51.742Z] ----------------------------------------------------------------------
+[debug] [2019-05-30T14:18:51.745Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Martin_HP\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-05-30T14:18:51.746Z] CLI Version:   6.10.0
+[debug] [2019-05-30T14:18:51.746Z] Platform:      win32
+[debug] [2019-05-30T14:18:51.746Z] Node Version:  v10.13.0
+[debug] [2019-05-30T14:18:51.747Z] Time:          Thu May 30 2019 16:18:51 GMT+0200 (Central European Summer Time)
+[debug] [2019-05-30T14:18:51.747Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-05-30T14:18:51.759Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-05-30T14:18:51.760Z] > authorizing via signed-in user
+[debug] [2019-05-30T14:18:51.760Z] [iam] checking project shoppinglistreact for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-05-30T14:18:51.763Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/shoppinglistreact:testIamPermissions  
+
+[debug] [2019-05-30T14:18:52.738Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:18:52.742Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/shoppinglistreact  
+ 
+[debug] [2019-05-30T14:18:53.049Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'shoppinglistreact'...
+[info] 
+[info] i  deploying functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] +  functions: Finished running predeploy script.
+[debug] [2019-05-30T14:19:08.374Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.3.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-05-30T14:19:08.375Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/shoppinglistreact?view=CONSUMER_VIEW  
+ 
+[debug] [2019-05-30T14:19:08.376Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/shoppinglistreact?view=CONSUMER_VIEW  
+ 
+[debug] [2019-05-30T14:19:09.886Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:09.922Z] <<< HTTP RESPONSE 200
+[info] +  functions: all necessary APIs are enabled
+[debug] [2019-05-30T14:19:09.923Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/shoppinglistreact  
+ 
+[debug] [2019-05-30T14:19:10.811Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:10.811Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/159869932650:getServerAppConfig  
+ 
+[debug] [2019-05-30T14:19:11.091Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:11.093Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/shoppinglistreact/versions  
+
+[debug] [2019-05-30T14:19:12.798Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2019-05-30T14:19:12.805Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/shoppinglistreact/configs  
+ 
+[debug] [2019-05-30T14:19:13.754Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (33.94 KB) for uploading
+[debug] [2019-05-30T14:19:14.046Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/shoppinglistreact/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2019-05-30T14:19:14.443Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:14.444Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-5e0c23f7-4f2c-49f5-b5d5-66e2f5ee45d6/1cab89d0-9630-42af-806e-ea19e2aee085.zip?GoogleAccessId=service-159869932650@gcf-admin-robot.iam.gserviceaccount.com&Expires=1559227752&Signature=jw8lzkOEcvjfldVPsF35o718OoSFyx9DVoF4lI4emMraHRz3EFr8ZNKO1qSA0qbSOBhVwrcef0rRRf9Mxu4FPxJue9VCbtudpaEBmnFcxn8%2BK%2FUBLxyqvCht6HwttI1Sf1qQyp6As90DMZyd%2FrfjTSU%2Bd4rR%2FmOPZi6qLfe2w1NSfhNGgrUsoEZ5mi9Y95fpSf%2FALIS4vGyM4e9BhyEYdfQVy%2FCGDR9DNr4CjIdCYbuk%2FbA3xpI5675IjmUyCxEWUU3LuWqk70iPCn8dCVdlhuAJ0uK1oGTpxRfUvoAiDqWWWhK8ei5V0kH%2B7bwnZguS81H0o%2FT61WZEcfyC2ZLFxA%3D%3D  
+
+[debug] [2019-05-30T14:19:14.863Z] <<< HTTP RESPONSE 200
+[info] +  functions: functions folder uploaded successfully
+[info] i  hosting[shoppinglistreact]: beginning deploy...
+[info] i  hosting[shoppinglistreact]: found 1 files in build
+[debug] [2019-05-30T14:19:14.895Z] [hosting] hash cache [YnVpbGQ] load error: lines is not defined
+[debug] [2019-05-30T14:19:14.904Z] [hosting] hash cache [YnVpbGQ] stored for 1 files
+[debug] [2019-05-30T14:19:14.904Z] [hosting][hash queue][FINAL]
+[debug] [2019-05-30T14:19:14.905Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/shoppinglistreact/versions/82a8744436dc20d4:populateFiles  
+ <request body omitted>
+[debug] [2019-05-30T14:19:16.074Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:16.078Z] [hosting][populate queue][FINAL]
+[debug] [2019-05-30T14:19:16.078Z] [hosting] uploads queued: 1
+[debug] [2019-05-30T14:19:18.770Z] [hosting][upload queue][FINAL]
+[info] +  hosting[shoppinglistreact]: file upload complete
+[debug] [2019-05-30T14:19:18.771Z] [hosting] deploy completed after 3906ms
+[debug] [2019-05-30T14:19:18.917Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/shoppinglistreact/locations/-/functions  
+ 
+[debug] [2019-05-30T14:19:19.362Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating Node.js 8 function helloWorld(us-central1)...
+[debug] [2019-05-30T14:19:19.369Z] Trigger is:  {"httpsTrigger":{}}
+[debug] [2019-05-30T14:19:19.371Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudscheduler.googleapis.com/projectSettings/shoppinglistreact?view=CONSUMER_VIEW  
+ 
+[debug] [2019-05-30T14:19:20.826Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:20.830Z] >>> HTTP REQUEST PATCH https://cloudfunctions.googleapis.com/v1/projects/shoppinglistreact/locations/us-central1/functions/helloWorld {"updateMask":"sourceUploadUrl,name,labels,runtime,httpsTrigger"} 
+
+[debug] [2019-05-30T14:19:21.315Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:21.320Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/projects/shoppinglistreact/locations/-/functions  
+ 
+[debug] [2019-05-30T14:19:21.781Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:21.783Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c2hvcHBpbmdsaXN0cmVhY3QvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9vR0VDN3Baa0lfdw  
+ 
+[debug] [2019-05-30T14:19:22.085Z] <<< HTTP RESPONSE 200
+[debug] [2019-05-30T14:19:24.088Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/c2hvcHBpbmdsaXN0cmVhY3QvdXMtY2VudHJhbDEvaGVsbG9Xb3JsZC9vR0VDN3Baa0lfdw  
+ 
+[debug] [2019-05-30T14:19:24.426Z] <<< HTTP RESPONSE 200
