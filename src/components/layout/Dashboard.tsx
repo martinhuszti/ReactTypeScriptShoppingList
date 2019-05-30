@@ -6,6 +6,7 @@ import ShoppingItem from "../../models/ShoppingItem";
 import ItemCreate from '../shoppingitem/ItemCreate';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import Notifications from '../notification/Notifications'
 
 const Dashboard = (props: any) => {
     const { items }: { items: ShoppingItem[] } = props
@@ -14,7 +15,14 @@ const Dashboard = (props: any) => {
     if (!auth.uid) return <Redirect to='/signin' />
     return (
         <div className="dashboard container">
-            <ItemList items={items} />
+            <div className="row">
+                <div className="col s12 m6">
+                    <ItemList items={items} />
+                </div>
+                <div className="col s12 m5 offset-m1">
+                    <Notifications />
+                </div>
+            </div>
             <ItemCreate />
         </div>
 

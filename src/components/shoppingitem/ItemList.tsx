@@ -5,7 +5,7 @@ import ShoppingItem from "../../models/ShoppingItem";
 const ItemList = ({ items }: { items: ShoppingItem[] }) => {
 
     return (
-        <div>
+        <div className="container">
             {items && items.map(item => {
                 return (
                     <ItemSummary item={item} key={item.id} />
