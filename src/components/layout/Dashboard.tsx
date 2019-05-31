@@ -9,8 +9,7 @@ import { Redirect } from 'react-router-dom';
 import Notifications from '../notification/Notifications'
 
 const Dashboard = (props: any) => {
-    const { items }: { items: ShoppingItem[] } = props
-    const { auth } = props
+    const { items, auth, notifications } = props
 
     if (!auth.uid) return <Redirect to='/signin' />
     return (
@@ -20,7 +19,7 @@ const Dashboard = (props: any) => {
                     <ItemList items={items} />
                 </div>
                 <div className="col s12 m5 offset-m1">
-                    <Notifications />
+                    <Notifications notifications={notifications} />
                 </div>
             </div>
             <ItemCreate />
@@ -33,12 +32,14 @@ const mapStateToProps = (state: any) => {
     return {
         items: state.firestore.ordered.shopping_items,
         auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
     }
 }
 
 export default compose<any>
     (connect(mapStateToProps),
-        firestoreConnect([{
-            collection: 'shopping_items'
-        }])
+        firestoreConnect([
+            { collection: 'shopping_items', orderBy: ['createdDate', 'desc'] },
+            { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
+        ])
     )(Dashboard);

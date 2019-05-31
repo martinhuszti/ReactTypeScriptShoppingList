@@ -5,9 +5,12 @@ import Dashboard from './components/layout/Dashboard';
 import SignIn from './components/auth/SignIn';
 import { isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
+import moment from 'moment'
+import 'moment/locale/hu'
 
 const App: React.FC = (props: any) => {
     const { auth } = props
+    moment().locale("hu");
 
     if (isLoaded(auth))
         return (

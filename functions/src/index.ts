@@ -1,5 +1,4 @@
 import { firestore } from 'firebase/app';
-import Notification from './Notification'
 
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
@@ -9,7 +8,7 @@ admin.initializeApp(functions.config().firebase)
 //     response.send("Hello from Firebase!");
 // });
 
-const createNotification = ((notification: Notification) => {
+const createNotification = ((notification: any) => {
     return admin.firestore().collection('notifications')
         .add(notification)
         .then((doc: firestore.DocumentSnapshot) => {
@@ -22,9 +21,10 @@ exports.itemCreated = functions.firestore
     .onCreate((doc: firestore.DocumentSnapshot) => {
         const item: any = doc.data()
         const notification = {
-            titles: "Item created!",
+            title: "Item created!",
             user: item.createdBy,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
         return createNotification(notification)
     })
+
