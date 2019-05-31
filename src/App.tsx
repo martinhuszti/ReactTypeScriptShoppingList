@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Navbar from './components/layout/Navbar'
+import Header from './components/layout/Header'
 import Dashboard from './components/layout/Dashboard';
 import SignIn from './components/auth/SignIn';
 import { isLoaded } from 'react-redux-firebase';
@@ -12,11 +12,16 @@ const App: React.FC = (props: any) => {
     const { auth } = props
     moment().locale("hu");
 
-    if (isLoaded(auth))
+    if (!isLoaded(auth)) return (<div></div>)
+
         return (
             <BrowserRouter>
+            <div>
+
+                <Header className="z-depth-1"/>
+                </div>
+
                 <div className="App">
-                    <Navbar />
                     <Switch>
                         <Route exact path='/' component={Dashboard} />
                         <Route path='/signin' component={SignIn} />
@@ -24,7 +29,6 @@ const App: React.FC = (props: any) => {
                 </div>
             </BrowserRouter>
         )
-    return (<div></div>)
 }
 
 const mapStateToProps = (state: any) => {

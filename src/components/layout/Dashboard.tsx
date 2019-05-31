@@ -2,7 +2,6 @@ import React from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase'
-import ShoppingItem from "../../models/ShoppingItem";
 import ItemCreate from '../shoppingitem/ItemCreate';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';

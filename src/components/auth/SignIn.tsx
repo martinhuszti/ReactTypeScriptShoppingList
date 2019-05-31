@@ -15,7 +15,6 @@ const SignIn = (props: any) => {
     if (auth.uid) return <Redirect to='/' />
 
     return (
-        <div>
             <div className="container">
                 <form onSubmit={handleSubmit} className="white">
                     <h5 className="grey-text text-darken-3">Sign In</h5>
@@ -28,15 +27,13 @@ const SignIn = (props: any) => {
                         <input type="password" autoComplete="current-password" id="password" onChange={e => cred.password = (e.target.value)} />
                     </div>
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Login</button>
+                        <button className="btn pink lighten-1 ">Login</button>
                     </div>
                     <div className="red-text center">
                         {authError ? <p>{authError}</p> : null}
                     </div>
                 </form>
             </div>
-
-        </div>
     )
 }
 

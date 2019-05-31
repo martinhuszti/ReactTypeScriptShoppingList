@@ -5,7 +5,7 @@ const Notifications = (props: any) => {
     const { notifications } = props
     return (
         <div className="section container">
-            <div className="card z-depth-0">
+            <div className="card ">
                 <div className="card-content">
                     <span className="card-title">
                         Notifications
