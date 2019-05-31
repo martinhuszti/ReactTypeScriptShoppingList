@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
+import {Nav} from 'react-bootstrap'
 
 const SignedInLinks = (props: any) => {
     return (
-        <ul className="right">
-            <li><a href="" onClick={props.signOut} >Log Out</a></li>
-        </ul>
+               <Nav variant="pills" >
+               <Nav.Item>
+                   <Nav.Link href="#/home" onClick={props.signOut} to='/'>Log out</Nav.Link>
+               </Nav.Item>   
+                </Nav>
     )
 }
 

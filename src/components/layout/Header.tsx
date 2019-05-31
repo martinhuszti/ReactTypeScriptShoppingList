@@ -9,13 +9,11 @@ const Header = (props: any) => {
     const { auth } = props
     const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />
     return (
-        <Navbar sticky="top" collapseOnSelect expand="lg" bg="info" variant="light">
+        <Navbar sticky="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
             <Navbar.Brand href="#home">Bevásárlólista</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav" variant="pills">
-                <Nav variant="pills" >
-                    {links}
-                </Nav>
+            <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav" >
+            {links}
             </Navbar.Collapse>
         </Navbar>
     )

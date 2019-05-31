@@ -1,11 +1,14 @@
 import React from 'react'
-import {Nav} from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 
 const SignedOutLinks = () => {
     return (
-        <Nav.Item>
-            <Nav.Link to='/signin'>Log in</Nav.Link>
-        </Nav.Item>
+        <Nav variant="pills" >
+            <Nav.Item>
+                <Nav.Link href="#/home" to='/signin'>Log in</Nav.Link>
+            </Nav.Item>   
+             </Nav>
+
     )
 }
 
