@@ -10,6 +10,8 @@ import { ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase'
 import { createFirestoreInstance, getFirestore, reduxFirestore } from 'redux-firestore' // <- needed if using firestore
 import firebaseConfig from './config/firebaseConfig'
 import thunk from 'redux-thunk'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const store = createStore(
     rootReducer,
