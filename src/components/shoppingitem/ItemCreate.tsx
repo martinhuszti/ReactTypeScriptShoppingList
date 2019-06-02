@@ -18,7 +18,7 @@ const ItemCreate = (props: any) => {
 
     const pStyle = {
         width: '30%'
-    };
+    }
 
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -70,7 +70,7 @@ const ItemCreate = (props: any) => {
     )
 }
 
-const mapDispatchProps = (dispatch: any, props: any) => {
+const mapDispatchProps = (dispatch: any) => {
     return {
         createItem: (item: ShoppingItem) => dispatch(createItem(item))
     }

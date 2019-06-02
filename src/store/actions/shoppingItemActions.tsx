@@ -18,3 +18,17 @@ export const createItem = (item: ShoppingItem) => {
 
     }
 }
+
+export const archiveItem = (item: ShoppingItem) => {
+    return (dispatch: any) => {
+        firebase.firestore().collection('shopping_items').doc(item.id).delete()
+            .then(() => {
+                dispatch({ type: 'ITEM_ARCHIVED', item })
+            })
+
+            .catch((err: Error) => {
+                dispatch({ type: 'ITEM_ARCHIVE_ERROR', err })
+            })
+
+    }
+}
