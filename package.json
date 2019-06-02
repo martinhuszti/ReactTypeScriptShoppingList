@@ -27,6 +27,7 @@
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
     "start": "^5.1.0",
+    "tslint": "^5.17.0",
     "typescript": "3.4.5"
   },
   "scripts": {

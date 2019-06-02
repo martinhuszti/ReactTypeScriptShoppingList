@@ -6,12 +6,13 @@ import { Modal, Button, Form, Col } from 'react-bootstrap';
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
+    const { auth }: { auth: any } = props
 
     const [item] = useState(new ShoppingItem());
 
-
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
+        item.created_by_user_id = auth.uid
         props.createItem(item)
         setShowModal(false)
     }
@@ -40,7 +41,7 @@ const ItemCreate = (props: any) => {
                             <Form.Label>Mennyit?</Form.Label>
                             <Form.Control onChange={(e: any) => item.quantity = e.target.value} type="number" placeholder="" />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formGridState">
+                        <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
                             <Form.Control style={pStyle} as="select">
                                 <option>db</option>
@@ -50,9 +51,18 @@ const ItemCreate = (props: any) => {
                                 <option>liter</option>
                                 <option>dl</option>
                                 <option>ml</option>
+                                <option>doboz</option>
+                                <option>zacskó</option>
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
+
+                    <Form.Group controlId="formDesc">
+                        <Form.Label>Leírás</Form.Label>
+                        <Form.Control onChange={(e: any) => item.description = e.target.value} as="textarea" rows="2" />
+                    </Form.Group>
+
+
                 </Form>
             </Modal.Body>
 
@@ -76,4 +86,10 @@ const mapDispatchProps = (dispatch: any) => {
     }
 }
 
-export default connect(null, mapDispatchProps)(ItemCreate);
+const mapStateToProps = (state: any) => {
+    return {
+        auth: state.firebase.auth,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(ItemCreate);

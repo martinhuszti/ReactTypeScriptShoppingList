@@ -1,12 +1,10 @@
 import { firestore } from 'firebase/app';
-
+import ShoppingItem from './models/ShoppingItem';
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
+
 admin.initializeApp(functions.config().firebase)
 
-// exports.helloWorld = functions.https.onRequest((request: any, response: any) => {
-//     response.send("Hello from Firebase!");
-// });
 
 const createNotification = ((notification: any) => {
     return admin.firestore().collection('notifications')
@@ -19,10 +17,10 @@ const createNotification = ((notification: any) => {
 exports.itemCreated = functions.firestore
     .document('shopping_items/{itemId}')
     .onCreate((doc: firestore.DocumentSnapshot) => {
-        const item: any = doc.data()
+        const item = doc.data() as ShoppingItem
         const notification = {
             title: "Item created!",
-            user: item.createdBy,
+            user: item.created_by_user_id,
             time: admin.firestore.FieldValue.serverTimestamp()
         }
         return createNotification(notification)

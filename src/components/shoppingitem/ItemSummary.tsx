@@ -1,17 +1,17 @@
 import React, { CSSProperties } from 'react'
 import ShoppingItem from '../../models/ShoppingItem';
 import moment from 'moment'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { archiveItem } from '../../store/actions/shoppingItemActions';
 
-const ItemSummary = ( props: any) => {
- const {item} : {item: ShoppingItem} = props 
- const {archiveItem} = props 
+const ItemSummary = (props: any) => {
+  const { item }: { item: ShoppingItem } = props
+  const { archiveItem } = props
 
   const pStyle = {
     marginTop: '1em',
-   } as CSSProperties
+  } as CSSProperties
 
   const handleDelete = (evt: any) => {
     evt.preventDefault();
@@ -20,15 +20,24 @@ const ItemSummary = ( props: any) => {
 
   return (
     <Card style={pStyle} className="shopping item card" bg="warning" text="white">
-      <Card.Header>{item.title}</Card.Header>
-      <Card.Body>
-        <Card.Title>Felvette:{item.created_by_user_id}</Card.Title>
-        <Card.Text>
-          {moment(item.createdDate.toDate().toISOString()).calendar()}
-        </Card.Text>
-        <Button variant="danger" onClick={handleDelete}>Törlés</Button>
+      <Card.Header>
+        <Row>
+          <Col >
+            <span>{item.quantity} {item.quantity_measure} </span>
+            <span>{item.title}</span>
+          </Col>
+          <Col xs={3}> <Button variant="danger" onClick={handleDelete}>Törlés</Button></Col>
+        </Row>
 
+      </Card.Header>
+      <Card.Body>
+        <Card.Text>
+          {item.description}
+          <h6>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
+          </h6>
+        </Card.Text>
       </Card.Body>
+
     </Card>
   )
 }
