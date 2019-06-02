@@ -12,7 +12,7 @@ const Header = (props: any) => {
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-                <Navbar.Brand href="#home">Bevásárlólista</Navbar.Brand>
+                <Navbar.Brand href="/">Bevásárlólista</Navbar.Brand>
                 <Nav className="justify-content-start" variant="pills" >
                     <Nav.Item>
                         <Button variant="success" onClick={() => setShowModal(true)}>

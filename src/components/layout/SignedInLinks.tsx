@@ -1,13 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
-import { Nav, Button } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
+
 
 const SignedInLinks = (props: any) => {
     return (
-        <Nav variant="pills" >
+        <Nav>
             <Nav.Item>
-                <Button variant="danger" onClick={props.signOut}>Kijelentkezés</Button>
+                <Nav.Link  as={Link} to='/newuser'> Új felhasználó felvétele
+                    </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                <Nav.Link onClick={props.signOut}>Kijelentkezés</Nav.Link>
             </Nav.Item>
         </Nav>
     )

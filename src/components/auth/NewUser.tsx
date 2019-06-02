@@ -13,12 +13,11 @@ const SignIn = (props: any) => {
         props.signIn(cred)
     }
 
-    if (auth.uid) return <Redirect to='/' />
+    if (!auth.uid) return <Redirect to='/signin' />
 
     return (
         <div className="container">
-<h1>Bejelentkezés</h1>
-
+            <h1> Új felhasználó hozzáadaása a csoporthoz</h1>
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
@@ -37,7 +36,7 @@ const SignIn = (props: any) => {
                     Bejelentkezés
 </Button>
             </Form>
-            
+
             <div className="red-text center">
                 {authError ? <p>{authError}</p> : null}
             </div>

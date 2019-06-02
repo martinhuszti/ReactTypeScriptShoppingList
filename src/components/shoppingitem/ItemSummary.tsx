@@ -26,15 +26,18 @@ const ItemSummary = (props: any) => {
             <span>{item.quantity} {item.quantity_measure} </span>
             <span>{item.title}</span>
           </Col>
-          <Col xs={3}> <Button variant="danger" onClick={handleDelete}>Törlés</Button></Col>
+          <Col xs={4} lg={3} xl={2}> <Button variant="danger" onClick={handleDelete}>Törlés</Button></Col>
         </Row>
 
       </Card.Header>
       <Card.Body>
         <Card.Text>
           {item.description}
-          <h6>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
-          </h6>
+          </Card.Text>
+
+          <Card.Text>
+          {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
+       
         </Card.Text>
       </Card.Body>
 

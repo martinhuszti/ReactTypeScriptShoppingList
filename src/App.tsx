@@ -7,6 +7,7 @@ import { isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import 'moment/locale/hu'
+import NewUser from './components/auth/NewUser';
 
 const App: React.FC = (props: any) => {
     const { auth } = props
@@ -21,6 +22,8 @@ const App: React.FC = (props: any) => {
                 <Switch>
                     <Route exact path='/' component={Dashboard} />
                     <Route path='/signin' component={SignIn} />
+                    <Route path='/newuser' component={NewUser} />
+                    <Route component={Dashboard} />
                 </Switch>
             </div>
 
@@ -29,6 +32,7 @@ const App: React.FC = (props: any) => {
 }
 
 const mapStateToProps = (state: any) => {
+    console.log(state)
     return {
         auth: state.firebase.auth
     }
