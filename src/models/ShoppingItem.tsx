@@ -6,8 +6,9 @@ export default class ShoppingItem {
         public id: string = "",
         public title: string = "",
         public description: string = "",
-        public createdBy: string = "",
+        public created_by_user_id: string = "",
         public quantity: number = 0,
+        public quantity_measure: string = "db",
         public createdDate = firestore.Timestamp.now()
 
     ) { }

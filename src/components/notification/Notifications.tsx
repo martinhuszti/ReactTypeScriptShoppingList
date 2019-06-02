@@ -12,7 +12,6 @@ const Notifications = (props: any) => {
                     </span>
                     <ul className="notifications">
                         {notifications && notifications.map((notif: any) => {
-                            moment.lang('fr')
                             return (
                                 <li key={notif.id}>
                                     <span className="pink-text">{notif.title} </span>

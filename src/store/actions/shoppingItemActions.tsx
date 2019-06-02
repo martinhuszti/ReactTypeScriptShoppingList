@@ -1,14 +1,10 @@
 import ShoppingItem from "../../models/ShoppingItem";
-import { FirebaseFirestore } from "@firebase/firestore-types";
-import { firestore } from 'firebase/app';
-
-
+import firebaseConfig from '../../config/firebaseConfig'
+const firebase = firebaseConfig;
 
 export const createItem = (item: ShoppingItem) => {
-    return (dispatch: any, getState: any,
-        { getFirestore }: any) => {
-        const firebaseFirestore: FirebaseFirestore = getFirestore()
-        const newRef = firebaseFirestore.collection('shopping_items').doc()
+    return (dispatch: any) => {
+        const newRef = firebase.firestore().collection('shopping_items').doc()
         item.id = newRef.id
         newRef.set(Object.assign({}, item))
 

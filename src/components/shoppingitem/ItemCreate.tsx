@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import ShoppingItem from "../../models/ShoppingItem";
 import { createItem } from '../../store/actions/shoppingItemActions';
+import { Modal, Button, Form, Col } from 'react-bootstrap';
 
 const ItemCreate = (props: any) => {
+    const { showModal, setShowModal } = props
 
     const [item] = useState(new ShoppingItem());
 
@@ -11,36 +13,64 @@ const ItemCreate = (props: any) => {
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         props.createItem(item)
+        setShowModal(false)
     }
 
-
+    const pStyle = {
+        width: '30%'
+    };
 
     return (
-        <div>
-            <div className="container">
-                <form onSubmit={handleSubmit} className="white">
-                    <h5 className="grey-text text-darken-3">Add New Item</h5>
-                    <div className="input-field">
-                        <label htmlFor="text">Mit?</label>
-                        <input type="text" id="text" onChange={e => item.title = e.target.value} />
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor="Mennyit">Mennyit?</label>
-                        <input type="number" id="number" onChange={e => item.quantity = +e.target.value} />
-                    </div>
-                    <div className="input-field">
-                        <button className="btn green lighten-1 z-depth-0">Add</button>
-                    </div>
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header closeButton>
+                <Modal.Title>Új Termék Felvétele</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={(e: any) => handleSubmit(e)}>
 
-                </form>
-            </div>
+                    <Form.Group controlId="formMit">
+                        <Form.Label>Mit?</Form.Label>
+                        <Form.Control required onChange={(e: any) => item.title = e.target.value} type="email" placeholder="Kenyér..." />
+                        <Form.Text className="text-muted">
+                            Mit szeretnél venni. Pl. kenyér, vaj stb.
+                      </Form.Text>
+                    </Form.Group>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formMennyit">
+                            <Form.Label>Mennyit?</Form.Label>
+                            <Form.Control onChange={(e: any) => item.quantity = e.target.value} type="number" placeholder="" />
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formGridState">
+                            <Form.Label>Mérték</Form.Label>
+                            <Form.Control style={pStyle} as="select">
+                                <option>db</option>
+                                <option>kg</option>
+                                <option>dkg</option>
+                                <option>gramm</option>
+                                <option>liter</option>
+                                <option>dl</option>
+                                <option>ml</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Form.Row>
+                </Form>
+            </Modal.Body>
 
-        </div>
+
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    Mégsem
+                </Button>
+                <Button variant="primary" onClick={(e: any) => handleSubmit(e)}>
+                    Felvesz
+                </Button>
+            </Modal.Footer>
+        </Modal >
 
     )
 }
 
-const mapDispatchProps = (dispatch: any) => {
+const mapDispatchProps = (dispatch: any, props: any) => {
     return {
         createItem: (item: ShoppingItem) => dispatch(createItem(item))
     }

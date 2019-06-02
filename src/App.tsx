@@ -7,7 +7,6 @@ import { isLoaded } from 'react-redux-firebase';
 import { connect } from 'react-redux';
 import moment from 'moment'
 import 'moment/locale/hu'
-import Footer from './components/layout/Footer';
 
 const App: React.FC = (props: any) => {
     const { auth } = props
@@ -15,26 +14,21 @@ const App: React.FC = (props: any) => {
 
     if (!isLoaded(auth)) return (<div></div>)
 
-        return (
-            <BrowserRouter>
-
-                <div className="App">
+    return (
+        <BrowserRouter>
+            <div className="App">
                 <Header />
-                    <Switch>
-                        <Route exact path='/' component={Dashboard} />
-                        <Route path='/signin' component={SignIn} />
-                    </Switch>
-                    <div className="justify-content-end">
-                    <Footer />
-                    </div>
-                </div>
+                <Switch>
+                    <Route exact path='/' component={Dashboard} />
+                    <Route path='/signin' component={SignIn} />
+                </Switch>
+            </div>
 
-            </BrowserRouter>
-        )
+        </BrowserRouter>
+    )
 }
 
 const mapStateToProps = (state: any) => {
-    console.log(state)
     return {
         auth: state.firebase.auth
     }
