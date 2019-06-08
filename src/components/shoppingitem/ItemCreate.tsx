@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
 import ShoppingItem from "../../models/ShoppingItem";
 import { createItem } from '../../store/actions/shoppingItemActions';
 import { Modal, Button, Form, Col } from 'react-bootstrap';
-import { string } from 'prop-types';
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
@@ -19,7 +18,7 @@ const ItemCreate = (props: any) => {
 
     const pStyle = {
         width: '30%'
-    }
+    } as CSSProperties
 
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>

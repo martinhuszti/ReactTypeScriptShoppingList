@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
@@ -13,11 +13,15 @@ const SignIn = (props: any) => {
         props.signIn(cred)
     }
 
+    const pStyle = {
+        marginTop: '1em',
+      } as CSSProperties
+
     if (!auth.uid) return <Redirect to='/signin' />
 
     return (
         <div className="container">
-            <h1> Új felhasználó hozzáadaása a csoporthoz</h1>
+            <h1 style={pStyle}> Új felhasználó hozzáadaása a csoporthoz</h1>
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">

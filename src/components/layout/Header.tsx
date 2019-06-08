@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
-import { connect } from 'react-redux';
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
+import { connect } from 'react-redux'
 import { Navbar, Nav, Button } from 'react-bootstrap'
-import ItemCreate from '../shoppingitem/ItemCreate';
+import ItemCreate from '../shoppingitem/ItemCreate'
+import { Link } from 'react-router-dom'
+
 
 const Header = (props: any) => {
     const { auth } = props
@@ -13,7 +15,7 @@ const Header = (props: any) => {
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-                <Navbar.Brand href="/">Bevásárlólista</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>Bevásárlólista</Navbar.Brand>
                 <Nav className="justify-content-start" variant="pills" >
                     <Nav.Item>
                         <Button hidden={hide} variant="success" onClick={() => setShowModal(true)}>
