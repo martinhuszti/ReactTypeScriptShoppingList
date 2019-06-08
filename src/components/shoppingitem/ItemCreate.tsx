@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import ShoppingItem from "../../models/ShoppingItem";
 import { createItem } from '../../store/actions/shoppingItemActions';
 import { Modal, Button, Form, Col } from 'react-bootstrap';
+import { string } from 'prop-types';
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
     const { auth }: { auth: any } = props
-
     const [item] = useState(new ShoppingItem());
-
+    
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         item.created_by_user_id = auth.uid
@@ -39,7 +39,8 @@ const ItemCreate = (props: any) => {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formMennyit">
                             <Form.Label>Mennyit?</Form.Label>
-                            <Form.Control onChange={(e: any) => item.quantity = e.target.value} type="number" placeholder="" />
+                            <Form.Control defaultValue={"1"}
+                                onChange={(e: any) => item.quantity = e.target.value} type="number" placeholder="" />
                         </Form.Group>
                         <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
@@ -59,7 +60,7 @@ const ItemCreate = (props: any) => {
 
                     <Form.Group controlId="formDesc">
                         <Form.Label>Leírás</Form.Label>
-                        <Form.Control onChange={(e: any) => item.description = e.target.value} as="textarea" rows="2" />
+                        <Form.Control placeholder="Félbarna..." onChange={(e: any) => item.description = e.target.value} as="textarea" rows="2" />
                     </Form.Group>
 
 

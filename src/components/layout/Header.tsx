@@ -9,13 +9,14 @@ const Header = (props: any) => {
     const { auth } = props
     const [showModal, setShowModal] = useState(false)
     const links = auth.uid ? <SignedInLinks setShowModal={setShowModal} /> : <SignedOutLinks />
+    const hide = auth.uid ? false : true
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Navbar.Brand href="/">Bevásárlólista</Navbar.Brand>
                 <Nav className="justify-content-start" variant="pills" >
                     <Nav.Item>
-                        <Button variant="success" onClick={() => setShowModal(true)}>
+                        <Button hidden={hide} variant="success" onClick={() => setShowModal(true)}>
                             Új termék
                       </Button>
                     </Nav.Item>
