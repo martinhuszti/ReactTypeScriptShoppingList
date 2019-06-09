@@ -17,7 +17,7 @@ const Header = (props: any) => {
     return (
         <>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-                <Navbar.Brand href="#brand" as={Link} to='/'>Bevásárlólista</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/'>Bevásárlólista</Navbar.Brand>
                 <Nav className="justify-content-start" variant="pills" >
                     <Nav.Item>
                         <Button hidden={hide} variant="success" onClick={() => setShowModal(true)}>
