@@ -1,36 +1,34 @@
-import React, { useState, CSSProperties } from 'react'
-import { connect } from 'react-redux';
-import ShoppingItem from "../../models/ShoppingItem";
-import { createItem } from '../../store/actions/shoppingItemActions';
-import { Modal, Button, Form, Col } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import ShoppingItem from "../../models/ShoppingItem"
+import { createItem } from '../../store/actions/shoppingItemActions'
+import { Modal, Button, Form, Col } from 'react-bootstrap'
+import User from './../../models/User'
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
-    const { auth }: { auth: any } = props
+    const { profile }: { profile: User } = props
     const [item] = useState(new ShoppingItem());
-    
+
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        item.created_by_user_id = auth.uid
+        item.created_by_user_id = profile.nickName
         props.createItem(item)
         setShowModal(false)
     }
 
-    const pStyle = {
-        width: '30%'
-    } as CSSProperties
 
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Új Termék Felvétele</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={(e: any) => handleSubmit(e)}>
+            <Form onSubmit={handleSubmit}>
 
+                <Modal.Header closeButton>
+                    <Modal.Title>Új Termék Felvétele</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <Form.Group controlId="formMit">
                         <Form.Label>Mit?</Form.Label>
-                        <Form.Control required onChange={(e: any) => item.title = e.target.value} type="email" placeholder="Kenyér..." />
+                        <Form.Control required autoComplete="text" onChange={(e: any) => item.title = e.target.value} type="text" placeholder="Kenyér..." />
                         <Form.Text className="text-muted">
                             Mit szeretnél venni. Pl. kenyér, vaj stb.
                       </Form.Text>
@@ -43,7 +41,7 @@ const ItemCreate = (props: any) => {
                         </Form.Group>
                         <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
-                            <Form.Control style={pStyle} as="select">
+                            <Form.Control as="select">
                                 <option>db</option>
                                 <option>kg</option>
                                 <option>dkg</option>
@@ -63,18 +61,19 @@ const ItemCreate = (props: any) => {
                     </Form.Group>
 
 
-                </Form>
-            </Modal.Body>
+
+                </Modal.Body>
 
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                    Mégsem
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Mégsem
                 </Button>
-                <Button variant="primary" onClick={(e: any) => handleSubmit(e)}>
-                    Felvesz
+                    <Button variant="primary" type="submit">
+                        Felvesz
                 </Button>
-            </Modal.Footer>
+                </Modal.Footer>
+            </Form>
         </Modal >
 
     )
@@ -89,6 +88,7 @@ const mapDispatchProps = (dispatch: any) => {
 const mapStateToProps = (state: any) => {
     return {
         auth: state.firebase.auth,
+        profile: state.firebase.profile,
     }
 }
 

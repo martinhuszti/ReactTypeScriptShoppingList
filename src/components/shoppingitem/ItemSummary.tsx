@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react'
 import ShoppingItem from '../../models/ShoppingItem';
 import moment from 'moment'
-import { Card, Button, Row, Col } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { archiveItem } from '../../store/actions/shoppingItemActions';
 
@@ -9,8 +9,18 @@ const ItemSummary = (props: any) => {
   const { item }: { item: ShoppingItem } = props
   const { archiveItem } = props
 
-  const pStyle = {
-    marginTop: '1em',
+  const cardStyle = {
+    marginBottom: '1em',
+  } as CSSProperties
+
+  const cardHeaderStyle = {
+    paddingTop: '0.3em',
+    paddingBottom: '0.3em',
+    display: 'inline-block'
+  } as CSSProperties
+
+  const buttonStyle = {
+    float: "right"
   } as CSSProperties
 
   const handleDelete = (evt: any) => {
@@ -19,25 +29,18 @@ const ItemSummary = (props: any) => {
   }
 
   return (
-    <Card style={pStyle} className="shopping item card" bg="warning" text="white">
-      <Card.Header>
-        <Row>
-          <Col >
-            <span>{item.quantity} {item.quantity_measure} </span>
-            <span>{item.title}</span>
-          </Col>
-          <Col xs={4} lg={3} xl={2}> <Button variant="danger" onClick={handleDelete}>Törlés</Button></Col>
-        </Row>
-
+    <Card style={cardStyle} className="shopping item card" bg="warning" text="white">
+      <Card.Header style={cardHeaderStyle} >
+        <span>{item.quantity} {item.quantity_measure} {item.title}</span>
+        <Button style={buttonStyle} variant="danger" onClick={handleDelete}>Törlés</Button>
       </Card.Header>
       <Card.Body>
         <Card.Text>
           {item.description}
-          </Card.Text>
+        </Card.Text>
 
-          <Card.Text>
+        <Card.Text className="text-muted">
           {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
-       
         </Card.Text>
       </Card.Body>
 

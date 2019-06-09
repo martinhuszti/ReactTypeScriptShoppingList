@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
@@ -13,17 +13,21 @@ const SignIn = (props: any) => {
         props.signIn(cred)
     }
 
+    const dashboardStyle = {
+        marginTop : '1em'
+    } as CSSProperties
+
     if (auth.uid) return <Redirect to='/' />
 
     return (
-        <div className="container">
-<h1>Bejelentkezés</h1>
+        <div style={dashboardStyle} className="container">
+            <h1>Bejelentkezés</h1>
 
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email cím</Form.Label>
-                    <Form.Control onChange={(e: any) => cred.email = (e.target.value)} type="email" placeholder="Enter email" />
+                    <Form.Control autoComplete="email" onChange={(e: any) => cred.email = (e.target.value)} type="email" placeholder="Enter email" />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
   </Form.Text>
@@ -31,13 +35,13 @@ const SignIn = (props: any) => {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Jelszó</Form.Label>
-                    <Form.Control onChange={(e: any) => cred.password = (e.target.value)} type="password" placeholder="Password" />
+                    <Form.Control autoComplete="password" onChange={(e: any) => cred.password = (e.target.value)} type="password" placeholder="Password" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Bejelentkezés
 </Button>
             </Form>
-            
+
             <div className="red-text center">
                 {authError ? <p>{authError}</p> : null}
             </div>
