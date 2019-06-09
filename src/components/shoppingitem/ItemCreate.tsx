@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import ShoppingItem from "../../models/ShoppingItem";
 import { createItem } from '../../store/actions/shoppingItemActions';
@@ -16,9 +16,6 @@ const ItemCreate = (props: any) => {
         setShowModal(false)
     }
 
-    const pStyle = {
-        width: '30%'
-    } as CSSProperties
 
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -43,7 +40,7 @@ const ItemCreate = (props: any) => {
                         </Form.Group>
                         <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
-                            <Form.Control style={pStyle} as="select">
+                            <Form.Control as="select">
                                 <option>db</option>
                                 <option>kg</option>
                                 <option>dkg</option>

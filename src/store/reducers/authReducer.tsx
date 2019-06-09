@@ -1,7 +1,7 @@
 import { AnyAction } from "redux";
 
 const initState = {
-    authError: null
+    authError: null as string
 }
 
 const authReducer = (state = initState, action: AnyAction) => {
@@ -23,16 +23,21 @@ const authReducer = (state = initState, action: AnyAction) => {
         default: return state
 
         case 'SINGUP_SUCCESS':
-            console.log("SIGNOUT_SUCCESS")
+            console.log("SIGNUP_SUCCESS")
             return {
                 ...state,
                 authError: null
             }
         case 'SIGNUP_ERROR':
-            console.log("SIGNOUT_SUCCESS")
+            console.log("SIGNUP_ERROR")
             return {
                 ...state,
                 authError: action.err.message
+            }
+        case 'SIGNUP_RESPOND_IS_NULL':
+            console.log("SIGNUP_RESPOND_IS_NULL")
+            return {
+                ...state,
             }
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase'
@@ -10,9 +10,13 @@ import Notifications from '../notification/Notifications'
 const Dashboard = (props: any) => {
     const { items, auth, notifications } = props
 
+    const dashboardStyle = {
+        marginTop : '1em'
+    } as CSSProperties
+
     if (!auth.uid) return <Redirect to='/signin' />
     return (
-        <div className="dashboard container">
+        <div style={dashboardStyle} className="dashboard container">
             <div className="row">
                 <div className="col s12 m6">
                     <ItemList items={items} />

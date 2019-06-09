@@ -1,6 +1,6 @@
 import ShoppingItem from "../../models/ShoppingItem";
-import firebaseConfig from '../../config/firebaseConfig'
-const firebase = firebaseConfig;
+import * as firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export const createItem = (item: ShoppingItem) => {
     return (dispatch: any) => {

@@ -1,9 +1,7 @@
-import firebaseConfig from '../../config/firebaseConfig'
-import { firestore } from 'firebase';
 import { Dispatch } from 'redux';
-
-const firebase = firebaseConfig;
-
+import * as firebase from 'firebase/app'
+import User from "./../../models/User"
+import 'firebase/firestore'
 
 export const signIn = (cred: any) => {
     return (dispatch: any, ) => {
@@ -27,14 +25,13 @@ export const signOut = () => {
     }
 }
 
-export const signUp = (newUser: any) => {
+export const signUp = (newUser: User) => {
     return (dispatch: Dispatch) => {
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email,
-            newUser.passoword
+            newUser.password
         ).then((respond) => {
-            if (respond.user == null) return
-            return firestore().collection('users').doc(respond.user.uid).set(newUser)
+            return firebase.firestore().collection('users').doc(respond.user.uid).set(Object.assign({}, newUser))
         }).then(() => {
             dispatch({ type: 'SINGUP_SUCCESS' })
         }).catch((err: ErrorEvent) => {
