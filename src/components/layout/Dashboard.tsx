@@ -1,17 +1,20 @@
 import React, { CSSProperties } from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase'
+import { firestoreConnect, FirestoreReducer } from 'react-redux-firebase'
 import ItemCreate from '../shoppingitem/ItemCreate';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-import Notifications from '../notification/Notifications'
+//import Notifications from '../notification/Notifications'
 
 const Dashboard = (props: any) => {
-    const { items, auth, notifications } = props
+    const { items, auth } = props
+    //const { notifications } = props
+    console.log(props)
+
 
     const dashboardStyle = {
-        marginTop : '1em'
+        marginTop: '1em'
     } as CSSProperties
 
     if (!auth.uid) return <Redirect to='/signin' />
@@ -31,18 +34,31 @@ const Dashboard = (props: any) => {
     )
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-        items: state.firestore.ordered.shopping_items,
-        auth: state.firebase.auth,
-        notifications: state.firestore.ordered.notifications
-    }
-}
+var sharedGroupId: string = ""
+export default compose<any>(
 
-export default compose<any>
-    (connect(mapStateToProps),
-        firestoreConnect([
-            { collection: 'shopping_items', orderBy: ['createdDate', 'desc'] },
-            { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
-        ])
-    )(Dashboard);
+    firestoreConnect(() => {
+
+        return [{
+            collection: 'shopping_items',
+            where: ["groupId", "==", sharedGroupId],
+            orderBy: ['createdDate', 'desc'],
+        }]
+        
+    }
+
+    ),
+
+    connect((props: any) => {
+        sharedGroupId = props.firebase.profile.groupId
+
+        return (
+            {
+                items: props.firestore.ordered.shopping_items,
+                auth: props.firebase.auth,
+                profile: props.firebase.profile,
+                //notifications: props.firestore.ordered.notifications,
+            })
+    })
+
+)(Dashboard) as any;

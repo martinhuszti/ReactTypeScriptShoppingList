@@ -1,36 +1,36 @@
 import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
-import { signIn } from '../../store/actions/authActions';
+import { createGroup } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 import User from './../../models/User'
+import FamilyGroup from './../../models/FamilyGroup'
 
 const FamilyGroupCreate = (props: any) => {
 
-    const [cred] = useState({ email: "", password: "" });
+    const [familyGroup] = useState(new FamilyGroup());
     const [newUser] = useState(new User());
-    const { authError, auth, profile } = props
+    const { authError, profile } = props
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        props.signIn(cred)
+        props.createGroup(familyGroup, newUser)
     }
 
     const dashboardStyle = {
         marginTop: '1em'
     } as CSSProperties
-
-    //TODO kiszed komment ha végeztem
-    // if (profile.email !== "martinhuszti@gmail.com") return <Redirect to='/' />
+    
+     if (profile.email !== "martinhuszti@gmail.com") return <Redirect to='/' />
 
     return (
         <div style={dashboardStyle} className="container">
             <h1>Új csoport létrehozása</h1>
 
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formGroupName">
                     <Form.Label>Csoportnév</Form.Label>
-                    <Form.Control autoComplete="text" onChange={(e: any) => cred.email = (e.target.value)} type="text" placeholder="Enter name" />
+                    <Form.Control autoComplete="text" onChange={(e: any) => familyGroup.name_id = (e.target.value)} type="text" placeholder="Enter name" />
                     <Form.Text className="text-muted">
                         Ez lesz a csoport neve
                              </Form.Text>
@@ -85,7 +85,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        signIn: (cred: any) => dispatch(signIn(cred))
+        createGroup: (familyGroup: FamilyGroup, newUser : User) => dispatch(createGroup(familyGroup, newUser))
     }
 }
 

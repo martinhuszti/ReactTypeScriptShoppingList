@@ -11,17 +11,17 @@ const SignedInLinks = (props: any) => {
     return (
         <Nav>
             {profile.email === "martinhuszti@gmail.com" ? <Nav.Item>
-                <Nav.Link href="#" as={Link} to='/newgroup'> Új csoport létrehozása
+                <Nav.Link href="#newgroup" as={Link} to='/newgroup'> Új csoport létrehozása
                     </Nav.Link>
             </Nav.Item>
                 : null}
 
             <Nav.Item>
-                <Nav.Link href="#" as={Link} to='/newuser'> Új felhasználó felvétele
+                <Nav.Link href="#newuser" as={Link} to='/newuser'> Új felhasználó felvétele
                     </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link href="#" onClick={props.signOut}>Kijelentkezés</Nav.Link>
+                <Nav.Link href="#signout" as={Link} to='/signin' onClick={props.signOut}>Kijelentkezés</Nav.Link>
             </Nav.Item>
         </Nav>
     )

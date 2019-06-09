@@ -13,6 +13,7 @@ const ItemCreate = (props: any) => {
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         item.created_by_user_id = profile.nickName
+        item.groupId = profile.groupId
         props.createItem(item)
         setShowModal(false)
     }
@@ -41,7 +42,7 @@ const ItemCreate = (props: any) => {
                         </Form.Group>
                         <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select"  onChange={(e: any) => item.quantity_measure = e.target.value}>
                                 <option>db</option>
                                 <option>kg</option>
                                 <option>dkg</option>

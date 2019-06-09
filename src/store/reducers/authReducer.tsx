@@ -39,6 +39,17 @@ const authReducer = (state = initState, action: AnyAction) => {
             return {
                 ...state,
             }
+        case 'GROUP_CREATION_SUCCESSFULL':
+            console.log("GROUP_CREATION_SUCCESSFULL")
+            return {
+                ...state,
+            }
+        case 'GROUP_CREATION_ERROR':
+            console.log("GROUP_CREATION_ERROR")
+            return {
+                ...state,
+                authError: action.err.message
+            }
     }
 }
 export default authReducer;
