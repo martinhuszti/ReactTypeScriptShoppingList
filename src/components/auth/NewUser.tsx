@@ -28,7 +28,7 @@ const SignIn = (props: any) => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email cím</Form.Label>
-                    <Form.Control autoComplete="email" onChange={(e: any) => newUser.email = (e.target.value)} type="email" placeholder="Enter email" />
+                    <Form.Control required autoComplete="email" onChange={(e: any) => newUser.email = e.target.value} type="email" placeholder="Enter email" />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                  </Form.Text>
@@ -36,7 +36,7 @@ const SignIn = (props: any) => {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Jelszó</Form.Label>
-                    <Form.Control autoComplete="password" onChange={(e: any) => newUser.password = (e.target.value)} type="password" placeholder="Password" />
+                    <Form.Control required autoComplete="password" onChange={(e: any) => newUser.password = e.target.value} type="password" placeholder="Password" />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Regisztáció

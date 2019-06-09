@@ -8,7 +8,7 @@ const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
     const { auth }: { auth: any } = props
     const [item] = useState(new ShoppingItem());
-    
+
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         item.created_by_user_id = auth.uid
@@ -19,15 +19,15 @@ const ItemCreate = (props: any) => {
 
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
-            <Modal.Header closeButton>
-                <Modal.Title>Új Termék Felvétele</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form onSubmit={(e: any) => handleSubmit(e)}>
+            <Form onSubmit={handleSubmit}>
 
+                <Modal.Header closeButton>
+                    <Modal.Title>Új Termék Felvétele</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     <Form.Group controlId="formMit">
                         <Form.Label>Mit?</Form.Label>
-                        <Form.Control required onChange={(e: any) => item.title = e.target.value} type="email" placeholder="Kenyér..." />
+                        <Form.Control required autoComplete="text" onChange={(e: any) => item.title = e.target.value} type="text" placeholder="Kenyér..." />
                         <Form.Text className="text-muted">
                             Mit szeretnél venni. Pl. kenyér, vaj stb.
                       </Form.Text>
@@ -60,18 +60,19 @@ const ItemCreate = (props: any) => {
                     </Form.Group>
 
 
-                </Form>
-            </Modal.Body>
+
+                </Modal.Body>
 
 
-            <Modal.Footer>
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                    Mégsem
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                        Mégsem
                 </Button>
-                <Button variant="primary" onClick={(e: any) => handleSubmit(e)}>
-                    Felvesz
+                    <Button variant="primary" type="submit">
+                        Felvesz
                 </Button>
-            </Modal.Footer>
+                </Modal.Footer>
+            </Form>
         </Modal >
 
     )
