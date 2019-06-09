@@ -3,7 +3,6 @@ import * as firebase from 'firebase/app'
 import User from "./../../models/User"
 import 'firebase/firestore'
 import FamilyGroup from "./../../models/FamilyGroup"
-import { ThunkDispatch } from 'redux-thunk';
 
 export const signIn = (cred: any) => {
     return (dispatch: any, ) => {
@@ -38,6 +37,7 @@ export const signUp = (newUser: User) => {
             newUser.password
         )
             .then((respond) => {
+                newUser.password = "not_stored_removed_in_authActions"
                 return firebase.firestore().collection('users').doc(respond.user.uid).set(Object.assign({}, newUser))
             })
 
@@ -55,7 +55,8 @@ export const createGroup = (group: FamilyGroup, admin: User) => {
     return (dispatch: any) => {
         firebase.firestore().collection('groups').doc(group.name_id).set(Object.assign({}, group))
             .then(() => {
-                return dispatch(signUp(admin));
+                admin.groupId = group.name_id
+                return dispatch(signUp(admin))
             })
             .then(() => {
                 dispatch({ type: 'GROUP_CREATION_SUCCESSFULL' })

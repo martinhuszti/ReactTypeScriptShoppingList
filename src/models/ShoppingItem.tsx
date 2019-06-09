@@ -10,7 +10,8 @@ export default class ShoppingItem {
         public created_by_user_id: string = "",
         public quantity: number = 1,
         public quantity_measure: string = "db",
-        public createdDate = firebase.firestore.Timestamp.now()
+        public createdDate = firebase.firestore.Timestamp.now(),
+        public groupId : string = "",
 
     ) { }
 }

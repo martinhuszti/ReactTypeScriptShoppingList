@@ -9,7 +9,6 @@ const SignIn = (props: any) => {
 
     const [newUser] = useState(new User())
     const { auth, authError } = props
-
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
         props.signUp(newUser)

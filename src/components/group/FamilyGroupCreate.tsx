@@ -1,6 +1,6 @@
 import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
-import { signIn, createGroup } from '../../store/actions/authActions';
+import { createGroup } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
 import User from './../../models/User'
@@ -10,7 +10,7 @@ const FamilyGroupCreate = (props: any) => {
 
     const [familyGroup] = useState(new FamilyGroup());
     const [newUser] = useState(new User());
-    const { authError, auth, profile } = props
+    const { authError, profile } = props
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
