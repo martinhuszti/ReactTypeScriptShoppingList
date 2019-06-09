@@ -4,8 +4,7 @@ import 'firebase/firestore'
 export default class ShoppingItem {
 
     constructor(
-        public title: string = "",
-        public description: string = "",
+        public name_id: string = "",
         public createdDate = firebase.firestore.Timestamp.now()
 
     ) { }

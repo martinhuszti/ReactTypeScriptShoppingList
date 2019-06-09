@@ -37,7 +37,7 @@ const App: React.FC = (props: any) => {
 const mapStateToProps = (state: any) => {
     console.log(state)
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.profile
     }
 }
 
