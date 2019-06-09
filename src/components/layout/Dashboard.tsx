@@ -21,9 +21,9 @@ const Dashboard = (props: any) => {
                 <div className="col s12 m6">
                     <ItemList items={items} />
                 </div>
-                <div className="col s12 m5 offset-m1">
+                {/* <div className="col s12 m5 offset-m1">
                     <Notifications notifications={notifications} />
-                </div>
+                </div> */}
             </div>
             <ItemCreate />
         </div>

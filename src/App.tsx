@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import moment from 'moment'
 import 'moment/locale/hu'
 import NewUser from './components/auth/NewUser';
+import GroupCreate from './components/group/FamilyGroupCreate';
+import FamilyGroupCreate from './components/group/FamilyGroupCreate';
 
 const App: React.FC = (props: any) => {
     const { auth } = props
@@ -23,6 +25,7 @@ const App: React.FC = (props: any) => {
                     <Route exact path='/' component={Dashboard} />
                     <Route path='/signin' component={SignIn} />
                     <Route path='/newuser' component={NewUser} />
+                    <Route path='/newgroup' component={FamilyGroupCreate} />
                     <Route component={Dashboard} />
                 </Switch>
             </div>

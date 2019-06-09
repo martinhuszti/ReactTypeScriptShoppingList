@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
@@ -13,10 +13,14 @@ const SignIn = (props: any) => {
         props.signIn(cred)
     }
 
+    const dashboardStyle = {
+        marginTop : '1em'
+    } as CSSProperties
+
     if (auth.uid) return <Redirect to='/' />
 
     return (
-        <div className="container">
+        <div style={dashboardStyle} className="container">
             <h1>Bejelentkezés</h1>
 
 

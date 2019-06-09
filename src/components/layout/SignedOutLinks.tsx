@@ -6,7 +6,7 @@ const SignedOutLinks = () => {
     return (
         <Nav variant="pills" >
             <Nav.Item>
-                <Nav.Link as={Link} to='/signin'>Log in</Nav.Link>
+                <Nav.Link href="#" as={Link} to='/signin'>Bejelentkezés</Nav.Link>
             </Nav.Item>   
              </Nav>
 

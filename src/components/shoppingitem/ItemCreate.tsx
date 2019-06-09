@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import ShoppingItem from "../../models/ShoppingItem";
-import { createItem } from '../../store/actions/shoppingItemActions';
-import { Modal, Button, Form, Col } from 'react-bootstrap';
+import { connect } from 'react-redux'
+import ShoppingItem from "../../models/ShoppingItem"
+import { createItem } from '../../store/actions/shoppingItemActions'
+import { Modal, Button, Form, Col } from 'react-bootstrap'
+import User from './../../models/User'
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
-    const { auth }: { auth: any } = props
+    const { profile }: { profile: User } = props
     const [item] = useState(new ShoppingItem());
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        item.created_by_user_id = auth.uid
+        item.created_by_user_id = profile.nickName
         props.createItem(item)
         setShowModal(false)
     }
@@ -87,6 +88,7 @@ const mapDispatchProps = (dispatch: any) => {
 const mapStateToProps = (state: any) => {
     return {
         auth: state.firebase.auth,
+        profile: state.firebase.profile,
     }
 }
 

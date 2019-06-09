@@ -1,30 +1,42 @@
 import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
-import { signUp } from '../../store/actions/authActions';
+import { signIn } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap'
-import User from "../../models/User"
+import User from './../../models/User'
 
-const SignIn = (props: any) => {
+const FamilyGroupCreate = (props: any) => {
 
-    const [newUser] = useState(new User())
-    const { auth, authError } = props
+    const [cred] = useState({ email: "", password: "" });
+    const [newUser] = useState(new User());
+    const { authError, auth, profile } = props
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
-        props.signUp(newUser)
+        props.signIn(cred)
     }
 
-    const pStyle = {
-        marginTop: '1em',
+    const dashboardStyle = {
+        marginTop: '1em'
     } as CSSProperties
 
-    if (!auth.uid) return <Redirect to='/signin' />
+    //TODO kiszed komment ha végeztem
+    // if (profile.email !== "martinhuszti@gmail.com") return <Redirect to='/' />
 
     return (
-        <div className="container">
-            <h1 style={pStyle}> Új felhasználó hozzáadaása a csoporthoz</h1>
+        <div style={dashboardStyle} className="container">
+            <h1>Új csoport létrehozása</h1>
+
             <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Csoportnév</Form.Label>
+                    <Form.Control autoComplete="text" onChange={(e: any) => cred.email = (e.target.value)} type="text" placeholder="Enter name" />
+                    <Form.Text className="text-muted">
+                        Ez lesz a csoport neve
+                             </Form.Text>
+                </Form.Group>
+
+                <h2>Admin hozzáadása csoporthoz</h2>
 
                 <Form.Group controlId="formNickname">
                     <Form.Label>Név</Form.Label>
@@ -51,8 +63,8 @@ const SignIn = (props: any) => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Regisztáció
-                    </Button>
+                    Új csoport létrehozása
+                </Button>
             </Form>
 
             <div className="red-text center">
@@ -65,15 +77,16 @@ const SignIn = (props: any) => {
 
 const mapStateToProps = (state: any) => {
     return {
+        authError: state.auth.authError,
         auth: state.firebase.auth,
-        authError: state.auth.authError
+        profile: state.firebase.profile,
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        signUp: (newUser: any) => dispatch(signUp(newUser))
+        signIn: (cred: any) => dispatch(signIn(cred))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(FamilyGroupCreate)

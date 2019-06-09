@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const Header = (props: any) => {
     const { auth } = props
     const [showModal, setShowModal] = useState(false)
-    const links = auth.uid ? <SignedInLinks setShowModal={setShowModal} /> : <SignedOutLinks />
+    const links = auth.uid ? <SignedInLinks profile={props.profile} setShowModal={setShowModal} /> : <SignedOutLinks />
     const hide = auth.uid ? false : true
     return (
         <>
@@ -23,8 +23,6 @@ const Header = (props: any) => {
                       </Button>
                     </Nav.Item>
                 </Nav>
-
-
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav" >
                     {links}
@@ -38,7 +36,8 @@ const Header = (props: any) => {
 
 const mapStateToProps = (state: any) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
     }
 }
 

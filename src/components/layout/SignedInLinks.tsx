@@ -3,17 +3,25 @@ import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
 import { Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
-
+import User from './../../models/User'
 
 const SignedInLinks = (props: any) => {
+    const { profile }: { profile: User } = props
+
     return (
         <Nav>
-            <Nav.Item>
-                <Nav.Link  as={Link} to='/newuser'> Új felhasználó felvétele
+            {profile.email === "martinhuszti@gmail.com" ? <Nav.Item>
+                <Nav.Link href="#" as={Link} to='/newgroup'> Új csoport létrehozása
                     </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                <Nav.Link onClick={props.signOut}>Kijelentkezés</Nav.Link>
+            </Nav.Item>
+                : null}
+
+            <Nav.Item>
+                <Nav.Link href="#" as={Link} to='/newuser'> Új felhasználó felvétele
+                    </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="#" onClick={props.signOut}>Kijelentkezés</Nav.Link>
             </Nav.Item>
         </Nav>
     )

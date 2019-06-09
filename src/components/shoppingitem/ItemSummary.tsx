@@ -39,9 +39,8 @@ const ItemSummary = (props: any) => {
           {item.description}
         </Card.Text>
 
-        <Card.Text>
+        <Card.Text className="text-muted">
           {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
-
         </Card.Text>
       </Card.Body>
 
