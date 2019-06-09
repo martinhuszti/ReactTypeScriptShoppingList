@@ -44,14 +44,14 @@ export default compose<any>(
             where: ["groupId", "==", sharedGroupId],
             orderBy: ['createdDate', 'desc'],
         }]
-        
+
     }
 
     ),
 
     connect((props: any) => {
-        sharedGroupId = props.firebase.profile.groupId
-
+        const { groupId }: { groupId: string } = props.firebase.profile
+        sharedGroupId = groupId ? groupId : ""
         return (
             {
                 items: props.firestore.ordered.shopping_items,
