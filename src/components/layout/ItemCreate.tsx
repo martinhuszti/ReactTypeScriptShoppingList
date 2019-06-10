@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import ShoppingItem from "../../models/ShoppingItem"
 import { createItem } from '../../store/actions/shoppingItemActions'
 import { Modal, Button, Form, Col } from 'react-bootstrap'
-import User from './../../models/User'
+import User from '../../models/User'
 
 const ItemCreate = (props: any) => {
     const { showModal, setShowModal } = props
     const { profile }: { profile: User } = props
     const [item] = useState(new ShoppingItem());
+    const testInput = useRef(null)
+    setTimeout(() => { testInput.current && testInput.current.focus() }, 1);
 
     const handleSubmit = (evt: any) => {
         evt.preventDefault();
@@ -18,18 +20,16 @@ const ItemCreate = (props: any) => {
         setShowModal(false)
     }
 
-
     return (
         <Modal show={showModal} onHide={() => setShowModal(false)}>
             <Form onSubmit={handleSubmit}>
-
                 <Modal.Header closeButton>
                     <Modal.Title>Új Termék Felvétele</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group controlId="formMit">
                         <Form.Label>Mit?</Form.Label>
-                        <Form.Control required autoComplete="text" onChange={(e: any) => item.title = e.target.value} type="text" placeholder="Kenyér..." />
+                        <Form.Control ref={testInput} required autoComplete="text" onChange={(e: any) => item.title = e.target.value} type="text" placeholder="Kenyér..." />
                         <Form.Text className="text-muted">
                             Mit szeretnél venni. Pl. kenyér, vaj stb.
                       </Form.Text>
@@ -42,7 +42,7 @@ const ItemCreate = (props: any) => {
                         </Form.Group>
                         <Form.Group as={Col} controlId="fromMeasure">
                             <Form.Label>Mérték</Form.Label>
-                            <Form.Control as="select"  onChange={(e: any) => item.quantity_measure = e.target.value}>
+                            <Form.Control as="select" onChange={(e: any) => item.quantity_measure = e.target.value}>
                                 <option>db</option>
                                 <option>kg</option>
                                 <option>dkg</option>
@@ -55,17 +55,11 @@ const ItemCreate = (props: any) => {
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
-
                     <Form.Group controlId="formDesc">
                         <Form.Label>Leírás</Form.Label>
                         <Form.Control placeholder="Félbarna..." onChange={(e: any) => item.description = e.target.value} as="textarea" rows="2" />
                     </Form.Group>
-
-
-
                 </Modal.Body>
-
-
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
                         Mégsem

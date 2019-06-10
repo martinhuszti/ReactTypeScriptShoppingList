@@ -27,7 +27,7 @@ const SignIn = (props: any) => {
 
                 <Form.Group controlId="formNickname">
                     <Form.Label>Név</Form.Label>
-                    <Form.Control required autoComplete="text" onChange={(e: any) => newUser.nickName = e.target.value} type="text" placeholder="Név" />
+                    <Form.Control autoFocus required autoComplete="text" onChange={(e: any) => newUser.nickName = e.target.value} type="text" placeholder="Név" />
                     <Form.Text className="text-muted">
                         Ez fog megjelenni a termékek alatt
                  </Form.Text>

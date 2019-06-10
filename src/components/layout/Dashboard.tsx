@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase'
-import ItemCreate from '../shoppingitem/ItemCreate';
+import ItemCreate from './ItemCreate';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
 //import Notifications from '../notification/Notifications'

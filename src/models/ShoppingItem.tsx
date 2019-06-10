@@ -11,7 +11,9 @@ export default class ShoppingItem {
         public quantity: number = 1,
         public quantity_measure: string = "db",
         public createdDate = firebase.firestore.Timestamp.now(),
-        public groupId : string = "",
-
+        public groupId: string = "",
+        public archived: boolean = false,
+        public archived_at: firebase.firestore.Timestamp = new firebase.firestore.Timestamp(0, 0),
+        public archived_by: string = "",
     ) { }
 }

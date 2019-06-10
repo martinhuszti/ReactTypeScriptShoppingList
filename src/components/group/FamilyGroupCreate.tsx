@@ -30,7 +30,7 @@ const FamilyGroupCreate = (props: any) => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formGroupName">
                     <Form.Label>Csoportnév</Form.Label>
-                    <Form.Control autoComplete="text" onChange={(e: any) => familyGroup.name_id = (e.target.value)} type="text" placeholder="Enter name" />
+                    <Form.Control autoFocus autoComplete="text" onChange={(e: any) => familyGroup.name_id = (e.target.value)} type="text" placeholder="Enter name" />
                     <Form.Text className="text-muted">
                         Ez lesz a csoport neve
                              </Form.Text>

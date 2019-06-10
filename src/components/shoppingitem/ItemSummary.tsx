@@ -1,15 +1,17 @@
 import React, { CSSProperties, useState } from 'react'
-import ShoppingItem from '../../models/ShoppingItem';
+import ShoppingItem from '../../models/ShoppingItem'
 import moment from 'moment'
 import { Card, Button, Collapse } from 'react-bootstrap'
-import { connect } from 'react-redux';
-import { archiveItem } from '../../store/actions/shoppingItemActions';
-import { Delete, KeyboardArrowDown } from '@material-ui/icons';
+import { connect } from 'react-redux'
+import { deleteItem, archiveItem } from '../../store/actions/shoppingItemActions'
+import { Delete, KeyboardArrowDown, Check } from '@material-ui/icons'
+import User from './../../models/User'
 
 
 const ItemSummary = (props: any) => {
   const { item }: { item: ShoppingItem } = props
-  const { archiveItem } = props
+  const { profile }: { profile: User } = props
+  const { deleteItem, archiveItem } = props
   const [cardOpen, setCardOpen] = useState(false)
 
   const cardStyle = {
@@ -35,43 +37,78 @@ const ItemSummary = (props: any) => {
 
 
   const handleDelete = (evt: any) => {
-    evt.preventDefault();
-    archiveItem(item)
+    evt.preventDefault()
+    deleteItem(item)
   }
 
-  return (
-    <Card style={cardStyle} className="shopping item card" bg="warning" text="white">
-      <Card.Header style={cardHeaderStyle} >
-        <span>{item.quantity} {item.quantity_measure} {item.title}</span>
-        <div style={marginStlye}>
-          <Button style={buttonStyle} variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
-          <Button variant="link" onClick={handleDelete}><Delete /></Button>
-        </div>
-      </Card.Header>
-      <Collapse in={cardOpen}>
-        <div id="example-collapse-text"> {/* For Smooth Animation */}
+  const handleArchive = (evt: any) => {
+    evt.preventDefault()
+    archiveItem(item, profile.nickName)
+  }
 
-          <Card.Footer>
+  return (<>
+    {!item.archived ?
+      <Card style={cardStyle} className="shopping item card" bg="warning" text="dark">
+        <Card.Header style={cardHeaderStyle} >
+          <span><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
+          <div style={marginStlye}>
+            <Button style={buttonStyle} variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+            {/* <Button variant="link" onClick={handleDelete}><Delete /></Button> */}
+            <Button variant="link" onClick={handleArchive}><Check /></Button>
+          </div>
+        </Card.Header>
+        <Collapse in={cardOpen}>
+          <div id="example-collapse-text"> {/* For Smooth Animation */}
+            <Card.Footer>
+              {item.description ? <Card.Text>
+                <b>Megjegyzés</b>: {item.description}
+              </Card.Text> : null}
+              <Card.Text className="text-muted">
+                <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
+              </Card.Text>
+            </Card.Footer>
+          </div>
+        </Collapse>
+      </Card>
+      :
+      <Card style={cardStyle} className="shopping item card" bg="light" text="dark">
+        <Card.Header style={cardHeaderStyle} >
+          <span><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
+          <div style={marginStlye}>
+            <Button style={buttonStyle} variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+            <Button variant="link" onClick={handleDelete}><Delete /></Button>
+            {/* <Button variant="link" onClick={handleArchive}><Check /></Button> */}
+          </div>
+        </Card.Header>
+        <Collapse in={cardOpen}>
+          <div id="example-collapse-text"> {/* For Smooth Animation */}
+            <Card.Footer>
+              {item.description ? <Card.Text>
+                <b>Megjegyzés</b>: {item.description}
+              </Card.Text> : null}
+              <Card.Text className="text-muted">
+                <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
+              </Card.Text>
+            </Card.Footer>
+          </div>
+        </Collapse>
+      </Card>
+    }
 
-            {item.description ? <Card.Text>
-              {item.description}
-            </Card.Text> : null}
-
-            <Card.Text className="text-muted">
-              {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
-            </Card.Text>
-          </Card.Footer>
-        </div>
-      </Collapse>
-
-    </Card>
-  )
+  </>)
 }
 
 const mapDispatchProps = (dispatch: any) => {
   return {
-    archiveItem: (item: ShoppingItem) => dispatch(archiveItem(item))
+    deleteItem: (item: ShoppingItem) => dispatch(deleteItem(item)),
+    archiveItem: (item: ShoppingItem, nickname: string) => dispatch(archiveItem(item, nickname)),
   }
 }
 
-export default connect(null, mapDispatchProps)(ItemSummary);
+const mapStateToProps = (state: any) => {
+  return {
+    profile: state.firebase.profile,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchProps)(ItemSummary);

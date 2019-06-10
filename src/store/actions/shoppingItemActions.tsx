@@ -9,25 +9,43 @@ export const createItem = (item: ShoppingItem) => {
         newRef.set(Object.assign({}, item))
 
             .then(() => {
-                dispatch({ type: 'CREATE_ITEM', item })
+                dispatch({ type: 'CREATED_ITEM', item })
             })
 
             .catch((err: Error) => {
-                dispatch({ type: 'CREATE_PROJECT_ERROR', err })
+                dispatch({ type: 'CREATED_PROJECT_ERROR', err })
             })
 
     }
 }
 
-export const archiveItem = (item: ShoppingItem) => {
+export const archiveItem = (item: ShoppingItem, nickname: string) => {
     return (dispatch: any) => {
-        firebase.firestore().collection('shopping_items').doc(item.id).delete()
+        firebase.firestore().collection('shopping_items').doc(item.id).set({
+            archived: true,
+            archived_at: firebase.firestore.Timestamp.now(),
+            archived_by: nickname,
+        }, {merge: true})
             .then(() => {
                 dispatch({ type: 'ITEM_ARCHIVED', item })
             })
 
             .catch((err: Error) => {
-                dispatch({ type: 'ITEM_ARCHIVE_ERROR', err })
+                dispatch({ type: 'ITEM_ARCHIVED_ERROR', err })
+            })
+
+    }
+}
+
+export const deleteItem = (item: ShoppingItem) => {
+    return (dispatch: any) => {
+        firebase.firestore().collection('shopping_items').doc(item.id).delete()
+            .then(() => {
+                dispatch({ type: 'ITEM_DELETED', item })
+            })
+
+            .catch((err: Error) => {
+                dispatch({ type: 'ITEM_DELETED_ERROR', err })
             })
 
     }
