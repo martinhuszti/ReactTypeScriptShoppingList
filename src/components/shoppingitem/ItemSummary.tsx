@@ -35,6 +35,10 @@ const ItemSummary = (props: any) => {
     marginLeft: "auto",
   } as CSSProperties
 
+  const strikeStlye = {
+    textDecoration: "line-through"
+  } as CSSProperties
+
 
   const handleDelete = (evt: any) => {
     evt.preventDefault()
@@ -48,12 +52,11 @@ const ItemSummary = (props: any) => {
 
   return (<>
     {!item.archived ?
-      <Card style={cardStyle} className="shopping item card" bg="warning" text="dark">
+      <Card onClick={() => setCardOpen(!cardOpen)} style={cardStyle} className="shopping item card" bg="warning" text="dark">
         <Card.Header style={cardHeaderStyle} >
           <span><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
           <div style={marginStlye}>
-            <Button style={buttonStyle} variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
-            {/* <Button variant="link" onClick={handleDelete}><Delete /></Button> */}
+            <Button style={buttonStyle} variant="link"><KeyboardArrowDown /></Button>
             <Button variant="link" onClick={handleArchive}><Check /></Button>
           </div>
         </Card.Header>
@@ -71,13 +74,12 @@ const ItemSummary = (props: any) => {
         </Collapse>
       </Card>
       :
-      <Card style={cardStyle} className="shopping item card" bg="light" text="dark">
+      <Card onClick={() => setCardOpen(!cardOpen)} style={cardStyle} className="shopping item card" bg="light" text="dark">
         <Card.Header style={cardHeaderStyle} >
-          <span><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
+          <span style={strikeStlye}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
           <div style={marginStlye}>
-            <Button style={buttonStyle} variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+            <Button style={buttonStyle} variant="link"><KeyboardArrowDown /></Button>
             <Button variant="link" onClick={handleDelete}><Delete /></Button>
-            {/* <Button variant="link" onClick={handleArchive}><Check /></Button> */}
           </div>
         </Card.Header>
         <Collapse in={cardOpen}>
