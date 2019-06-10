@@ -1,13 +1,14 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useState } from 'react'
 import ShoppingItem from '../../models/ShoppingItem';
 import moment from 'moment'
-import { Card, Button } from 'react-bootstrap'
+import { Card, Button, Collapse } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { archiveItem } from '../../store/actions/shoppingItemActions';
 
 const ItemSummary = (props: any) => {
   const { item }: { item: ShoppingItem } = props
   const { archiveItem } = props
+  const [cardOpen, setCardOpen] = useState(false)
 
   const cardStyle = {
     marginBottom: '1em',
@@ -23,6 +24,7 @@ const ItemSummary = (props: any) => {
     float: "right"
   } as CSSProperties
 
+
   const handleDelete = (evt: any) => {
     evt.preventDefault();
     archiveItem(item)
@@ -33,16 +35,24 @@ const ItemSummary = (props: any) => {
       <Card.Header style={cardHeaderStyle} >
         <span>{item.quantity} {item.quantity_measure} {item.title}</span>
         <Button style={buttonStyle} variant="danger" onClick={handleDelete}>Törlés</Button>
-      </Card.Header>
-      <Card.Body>
-        <Card.Text>
-          {item.description}
-        </Card.Text>
+        <Button style={buttonStyle} variant="info" onClick={() => setCardOpen(!cardOpen)}>Kinyit</Button>
 
-        <Card.Text className="text-muted">
-          {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
-        </Card.Text>
-      </Card.Body>
+      </Card.Header>
+      <Collapse in={cardOpen}>
+        <div id="example-collapse-text"> {/* For Smooth Animation */}
+
+          <Card.Footer>
+
+            {item.description ? <Card.Text>
+              {item.description}
+            </Card.Text> : null}
+
+            <Card.Text className="text-muted">
+              {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}
+            </Card.Text>
+          </Card.Footer>
+        </div>
+      </Collapse>
 
     </Card>
   )
