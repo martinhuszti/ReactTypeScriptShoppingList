@@ -18,7 +18,7 @@ const Header = (props: any) => {
         <>
             <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Navbar.Brand as={Link} to='/'>Bevásárlólista</Navbar.Brand>
-                <Nav className="justify-content-start" variant="pills" >
+               
                     <Nav.Item>
                         <Button hidden={hide} variant="success" onClick={() => setShowModal(true)}>
                             Új termék
@@ -30,7 +30,7 @@ const Header = (props: any) => {
                         </Badge></h4>
 
                     </Nav.Item>
-                </Nav>
+               
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav" >
                     {links}
