@@ -30,6 +30,12 @@ const itemReducer = (state = initState, action: AnyAction) => {
         case 'ITEM_ARCHIVED_ERROR':
             console.log('ITEM_ARCHIVED_ERROR', action.err)
             return state;
+        case 'ITEM_UNARCHIVED_ERROR':
+            console.log('ITEM_UNARCHIVED_ERROR', action.item)
+            return state;
+        case 'ITEM_UNARCHIVED_ERROR':
+            console.log('ITEM_UNARCHIVED_ERROR', action.err)
+            return state;
 
         default:
             return state;

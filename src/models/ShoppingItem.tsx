@@ -15,5 +15,7 @@ export default class ShoppingItem {
         public archived: boolean = false,
         public archived_at: firebase.firestore.Timestamp = new firebase.firestore.Timestamp(0, 0),
         public archived_by: string = "",
+        public unarchived_at: firebase.firestore.Timestamp = new firebase.firestore.Timestamp(0, 0),
+        public unarchived_by: string = "",
     ) { }
 }

@@ -33,7 +33,22 @@ export const archiveItem = (item: ShoppingItem, nickname: string) => {
             .catch((err: Error) => {
                 dispatch({ type: 'ITEM_ARCHIVED_ERROR', err })
             })
+    }
+}
+export const unArchiveItem = (item: ShoppingItem, nickname: string) => {
+    return (dispatch: any) => {
+        firebase.firestore().collection('shopping_items').doc(item.id).set({
+            archived: false,
+            archived_at: firebase.firestore.Timestamp.now(),
+            archived_by: nickname,
+        }, {merge: true})
+            .then(() => {
+                dispatch({ type: 'ITEM_UNARCHIVED', item })
+            })
 
+            .catch((err: Error) => {
+                dispatch({ type: 'ITEM_UNARCHIVED_ERROR', err })
+            })
     }
 }
 
