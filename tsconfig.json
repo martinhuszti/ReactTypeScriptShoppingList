@@ -18,10 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
-    "noImplicitAny": true,    
+    "jsx": "preserve"
   },
   "include": [
-    "src", "functions/src/Notification.tsx"
+    "src",
+    "functions/src/Notification.tsx"
   ]
 }

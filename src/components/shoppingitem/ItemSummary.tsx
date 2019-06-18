@@ -1,10 +1,10 @@
 import React, { CSSProperties, useState } from 'react'
 import ShoppingItem from '../../models/ShoppingItem'
 import moment from 'moment'
-import { Card, Button, Collapse, Form } from 'react-bootstrap'
+import { Card, Button, Collapse } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { deleteItem, archiveItem, unArchiveItem } from '../../store/actions/shoppingItemActions'
-import { Delete, KeyboardArrowDown, Check } from '@material-ui/icons'
+import { Delete, KeyboardArrowDown } from '@material-ui/icons'
 import User from './../../models/User'
 import Checkbox from '@material-ui/core/Checkbox';
 
@@ -14,6 +14,7 @@ const ItemSummary = (props: any) => {
   const { profile }: { profile: User } = props
   const { deleteItem, archiveItem, unArchiveItem } = props
   const [cardOpen, setCardOpen] = useState(false)
+  const [checkedState, setCheckedState] = useState(item.archived)
 
   const cardStyle = {
     marginBottom: '1rem',
@@ -46,64 +47,37 @@ const ItemSummary = (props: any) => {
     deleteItem(item)
   }
 
-  const handleArchive = (evt: any) => {
+  const handleCheck = (evt: any) => {
     evt.preventDefault()
-    archiveItem(item, profile.nickName)
-  }
-
-  const handleUnArchive = (evt: any) => {
-    evt.preventDefault()
-    unArchiveItem(item, profile.nickName)
+    item.archived ? unArchiveItem(item, profile.nickName) : archiveItem(item, profile.nickName)
+    setCheckedState(!checkedState)
   }
 
   return (<>
-    {!item.archived ?
-      <Card onClick={() => setCardOpen(!cardOpen)} style={cardStyle} className="shopping item card" bg="warning" text="dark">
-        <Card.Header style={cardHeaderStyle} >
-        <Checkbox onClick={handleArchive} color="primary"/>
 
-          <span><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
-          <div style={marginStlye}>
-            <Button style={buttonStyle} variant="link"><KeyboardArrowDown /></Button>
-          </div>
-        </Card.Header>
-        <Collapse in={cardOpen}>
-          <div id="example-collapse-text"> {/* For Smooth Animation */}
-            <Card.Footer>
-              {item.description ? <Card.Text>
+    <Card style={cardStyle} className="shopping item card" bg={item.archived ? "light" : "warning"} text="dark">
+      <Card.Header style={cardHeaderStyle} >
+        <Checkbox checked={checkedState} onChange={handleCheck} color="primary" />
+        <span style={item.archived? strikeStlye : null}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
+        <div style={marginStlye}>
+          <Button style={buttonStyle} variant="link"  onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+          <Button hidden={!item.archived} variant="link" onClick={handleDelete}><Delete /></Button>
+        </div>
+      </Card.Header>
+      <Collapse in={cardOpen}>
+        <div id="example-collapse-text"> {/* For Smooth Animation */}
+          <Card.Footer>
+            {item.description ? <Card.Text>
               {item.description}
-              </Card.Text> : null}
-              <Card.Text className="text-muted">
-                <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
-              </Card.Text>
-            </Card.Footer>
-          </div>
-        </Collapse>
-      </Card>
-      :
-      <Card onClick={() => setCardOpen(!cardOpen)} style={cardStyle} className="shopping item card" bg="light" text="dark">
-        <Card.Header style={cardHeaderStyle} >
-          <Checkbox checked onClick={handleUnArchive} color="primary"/>
-          <span style={strikeStlye}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
-          <div style={marginStlye}>
-            <Button style={buttonStyle} variant="link"><KeyboardArrowDown /></Button>
-            <Button variant="link" onClick={handleDelete}><Delete /></Button>
-          </div>
-        </Card.Header>
-        <Collapse in={cardOpen}>
-          <div id="example-collapse-text"> {/* For Smooth Animation */}
-            <Card.Footer>
-              {item.description ? <Card.Text>
-                {item.description}
-              </Card.Text> : null}
-              <Card.Text className="text-muted">
-                <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
-              </Card.Text>
-            </Card.Footer>
-          </div>
-        </Collapse>
-      </Card>
-    }
+            </Card.Text> : null}
+            <Card.Text className="text-muted">
+              <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
+            </Card.Text>
+          </Card.Footer>
+        </div>
+      </Collapse>
+    </Card>
+
 
   </>)
 }
