@@ -41,7 +41,7 @@ if (isLoaded(firebaseConfig.auth)) {
                 <App />
             </ReactReduxFirebaseProvider>
         </Provider>,
-        document.getElementById('root') as HTMLElement);
+        document.getElementById('root') );
     serviceWorker.unregister();
 }
 
