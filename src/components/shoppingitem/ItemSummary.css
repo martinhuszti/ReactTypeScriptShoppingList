@@ -1,6 +1,7 @@
 .card{
-    margin-bottom: 1rem;
+    margin: 10px auto; /* Added */
     max-width: 400px;
+    float: none; /* Added */
 }
 
 .buttoncontainer{

@@ -2,33 +2,42 @@ import React, { CSSProperties } from 'react'
 import ItemList from '../shoppingitem/ItemList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase'
-import ItemCreate from './ItemCreate';
+import ItemCreateModal from './ItemCreate';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
-//import Notifications from '../notification/Notifications'
+import ShoppingItem from '../../models/ShoppingItem';
+
+
+const dashboardStyle = {
+    marginTop: '1em'
+} as CSSProperties
 
 const Dashboard = (props: any) => {
-    const { items, auth } = props
-    //const { notifications } = props
+    require('./Dashboard.css')
+    const { auth } = props
     console.log(props)
 
+    const { items }: { items: ShoppingItem[] } = props
 
-    const dashboardStyle = {
-        marginTop: '1em'
-    } as CSSProperties
+    let archived: Array<ShoppingItem> = new Array()
+    let unArchived: Array<ShoppingItem> = new Array()
+
+    items && items.map(i => {
+        i.archived ? archived.push(i) : unArchived.push(i)
+    })
+
+
 
     if (!auth.uid) return <Redirect to='/signin' />
     return (
         <div style={dashboardStyle} className="dashboard container">
-            <div className="row">
-                <div className="col s12 m6">
-                    <ItemList items={items} />
-                </div>
-                {/* <div className="col s12 m5 offset-m1">
-                    <Notifications notifications={notifications} />
-                </div> */}
-            </div>
-            <ItemCreate />
+
+            <ItemList items={unArchived} />
+            <hr className="divider" />
+            <h6>Archívált</h6>
+            <ItemList items={archived} />
+
+            <ItemCreateModal />
         </div>
 
     )
@@ -44,9 +53,7 @@ export default compose<any>(
             where: ["groupId", "==", sharedGroupId],
             orderBy: ['createdDate', 'desc'],
         }]
-
     }
-
     ),
 
     connect((props: any) => {

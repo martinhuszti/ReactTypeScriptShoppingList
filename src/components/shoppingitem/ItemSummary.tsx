@@ -8,7 +8,6 @@ import { Delete, KeyboardArrowDown } from '@material-ui/icons'
 import User from './../../models/User'
 import Checkbox from '@material-ui/core/Checkbox';
 
-
 const ItemSummary = (props: any) => {
   const { item }: { item: ShoppingItem } = props
   const { profile }: { profile: User } = props
@@ -35,7 +34,7 @@ const ItemSummary = (props: any) => {
 
   return (<>
 
-    <Card className="shopping item card" bg={item.archived ? "light" : "warning"} text="dark">
+    <Card className="card" bg={item.archived ? "light" : "warning"} text="dark">
       <Card.Header className="cardHeaderStyle itemCard" >
         <Checkbox checked={checkedState} onChange={handleCheck} color="primary" />
         <span style={item.archived? strikeStlye : null}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
