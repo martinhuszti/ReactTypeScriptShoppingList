@@ -15,27 +15,7 @@ const ItemSummary = (props: any) => {
   const { deleteItem, archiveItem, unArchiveItem } = props
   const [cardOpen, setCardOpen] = useState(false)
   const [checkedState, setCheckedState] = useState(item.archived)
-
-  const cardStyle = {
-    marginBottom: '1rem',
-    maxWidth: '25em',
-  } as CSSProperties
-
-  const cardHeaderStyle = {
-    paddingTop: '0.3em',
-    paddingBottom: '0.3rem',
-    display: "flex",
-    alignItems: "center",
-    paddingRight: '0',
-  } as CSSProperties
-
-  const buttonStyle = {
-    float: "right"
-  } as CSSProperties
-
-  const marginStlye = {
-    marginLeft: "auto",
-  } as CSSProperties
+  require('./ItemSummary.css')
 
   const strikeStlye = {
     textDecoration: "line-through"
@@ -55,12 +35,12 @@ const ItemSummary = (props: any) => {
 
   return (<>
 
-    <Card style={cardStyle} className="shopping item card" bg={item.archived ? "light" : "warning"} text="dark">
-      <Card.Header style={cardHeaderStyle} >
+    <Card className="shopping item card" bg={item.archived ? "light" : "warning"} text="dark">
+      <Card.Header className="cardHeaderStyle itemCard" >
         <Checkbox checked={checkedState} onChange={handleCheck} color="primary" />
         <span style={item.archived? strikeStlye : null}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
-        <div style={marginStlye}>
-          <Button style={buttonStyle} variant="link"  onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+        <div className="buttoncontainer">
+          <Button className="expandButton" variant="link"  onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
           <Button hidden={!item.archived} variant="link" onClick={handleDelete}><Delete /></Button>
         </div>
       </Card.Header>
