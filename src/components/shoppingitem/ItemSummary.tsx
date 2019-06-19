@@ -37,9 +37,9 @@ const ItemSummary = (props: any) => {
     <Card className="card" bg={item.archived ? "light" : "warning"} text="dark">
       <Card.Header className="cardHeaderStyle itemCard" >
         <Checkbox checked={checkedState} onChange={handleCheck} color="primary" />
-        <span style={item.archived? strikeStlye : null}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
+        <span style={item.archived ? strikeStlye : null}><b>{item.quantity} {item.quantity_measure} {item.title}</b></span>
         <div className="buttoncontainer">
-          <Button className="expandButton" variant="link"  onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
+          <Button className="expandButton" variant="link" onClick={() => setCardOpen(!cardOpen)}><KeyboardArrowDown /></Button>
           <Button hidden={!item.archived} variant="link" onClick={handleDelete}><Delete /></Button>
         </div>
       </Card.Header>
@@ -51,6 +51,9 @@ const ItemSummary = (props: any) => {
             </Card.Text> : null}
             <Card.Text className="text-muted">
               <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
+              <br/>
+              {item.archived ? <i>Kipipálta: {item.archived_by} {moment(item.archived_at.toDate().toISOString()).calendar()}</i> : null}
+
             </Card.Text>
           </Card.Footer>
         </div>

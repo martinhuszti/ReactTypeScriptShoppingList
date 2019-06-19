@@ -34,7 +34,7 @@ const Dashboard = (props: any) => {
 
             <ItemList items={unArchived} />
             <hr className="divider" />
-            <h6>Archívált</h6>
+            <h6 align="center">Archívált</h6>
             <ItemList items={archived} />
 
             <ItemCreateModal />
