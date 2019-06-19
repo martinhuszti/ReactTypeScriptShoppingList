@@ -1,12 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // Require  html-webpack-plugin plugin
 const CopyPlugin = require('copy-webpack-plugin');
-const miniCssExtractPlugin = new MiniCssExtractPlugin({
-    moduleFilename: ({ name }) => `${name.replace('/tsx/', '/css/')}.css`
-  })
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
     entry: __dirname + "/src/index.tsx", // webpack entry point. Module to start building dependency graph
     output: {
-        path: __dirname + '/dist', // Folder to store generated bundle
+        path: __dirname + '/build', // Folder to store generated bundle
         filename: 'bundle.js', // Name of generated bundle after build
         publicPath: '/' // public URL of the output directory when referenced in a browser
     },
@@ -28,7 +27,7 @@ module.exports = {
                 test: /\.css$/,
                 use: ['css-hot-loader',
                     {
-                        loader: miniCssExtractPlugin.loader,
+                        loader: MiniCssExtractPlugin.loader,
                         options: {
                             // you can specify a publicPath here
                             // by default it uses publicPath in webpackOptions.output
