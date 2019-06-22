@@ -18,7 +18,6 @@ const App: React.FC = (props: any) => {
 
     return (
         <BrowserRouter>
-            <div className="App">
                 <Header />
                 <Switch>
                     <Route exact path='/' component={Dashboard} />
@@ -27,8 +26,6 @@ const App: React.FC = (props: any) => {
                     <Route path='/newgroup' component={FamilyGroupCreate} />
                     <Route component={Dashboard} />
                 </Switch>
-            </div>
-
         </BrowserRouter>
     )
 }
