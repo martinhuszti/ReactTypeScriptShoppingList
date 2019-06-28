@@ -20,6 +20,7 @@ const store = createStore(
             thunk.withExtraArgument(firebaseConfig)
         ),
         reduxFirestore(firebaseConfig),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
     ))
 const rrfConfig = {
