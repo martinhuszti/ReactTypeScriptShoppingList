@@ -9,6 +9,7 @@ import moment from 'moment'
 import 'moment/locale/hu'
 import NewUser from './components/auth/NewUser';
 import FamilyGroupCreate from './components/group/FamilyGroupCreate';
+import ProfileMainScreen from './components/profile/ProfileMainScreen';
 
 const App: React.FC = (props: any) => {
     const { auth } = props
@@ -24,6 +25,7 @@ const App: React.FC = (props: any) => {
                     <Route path='/signin' component={SignIn} />
                     <Route path='/newuser' component={NewUser} />
                     <Route path='/newgroup' component={FamilyGroupCreate} />
+                    <Route path='/profile' component={ProfileMainScreen} />
                     <Route component={Dashboard} />
                 </Switch>
         </BrowserRouter>

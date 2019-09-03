@@ -2,7 +2,7 @@ import React, { useState, CSSProperties } from 'react'
 import { connect } from 'react-redux';
 import { signUp } from '../../store/actions/authActions';
 import { Redirect } from 'react-router-dom';
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import User from "../../models/User"
 
 const SignIn = (props: any) => {
@@ -21,25 +21,31 @@ const SignIn = (props: any) => {
     if (!auth.uid) return <Redirect to='/signin' />
 
     return (
-        <div className="container">
+        <Container>
             <h1 style={pStyle}> Új felhasználó hozzáadaása a csoporthoz</h1>
             <Form onSubmit={handleSubmit}>
 
-                <Form.Group controlId="formNickname">
-                    <Form.Label>Név</Form.Label>
-                    <Form.Control autoFocus required autoComplete="text" onChange={(e: any) => newUser.nickName = e.target.value} type="text" placeholder="Név" />
-                    <Form.Text className="text-muted">
-                        Ez fog megjelenni a termékek alatt
-                 </Form.Text>
-                </Form.Group>
 
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email cím</Form.Label>
-                    <Form.Control required autoComplete="email" onChange={(e: any) => newUser.email = e.target.value} type="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                        Ezzel tudsz majd bejelentkezni
-                        </Form.Text>
-                </Form.Group>
+                <Form.Row>
+
+                    <Col>
+                        <Form.Group controlId="formNickname">
+                            <Form.Label>Név</Form.Label>
+                            <Form.Control autoFocus required autoComplete="text" onChange={(e: any) => newUser.nickName = e.target.value} type="text" placeholder="Név" />
+                            <Form.Text className="text-muted">Ez fog megjelenni a termékek alatt</Form.Text>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email cím</Form.Label>
+                            <Form.Control required autoComplete="email" onChange={(e: any) => newUser.email = e.target.value} type="email" placeholder="Enter email" />
+                            <Form.Text className="text-muted">Ezzel tudsz majd bejelentkezni</Form.Text>
+                        </Form.Group>
+                    </Col>
+
+                </Form.Row>
+
+
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Jelszó</Form.Label>
@@ -57,7 +63,7 @@ const SignIn = (props: any) => {
             <div className="red-text center">
                 {authError ? <p>{authError}</p> : null}
             </div>
-        </div>
+        </Container>
 
     )
 }
