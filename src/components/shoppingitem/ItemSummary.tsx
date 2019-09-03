@@ -50,9 +50,12 @@ const ItemSummary = (props: any) => {
               {item.description}
             </Card.Text> : null}
             <Card.Text className="text-muted">
-              <i>{item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
-              <br/>
-              {item.archived ? <i>Kipipálta: {item.archived_by} {moment(item.archived_at.toDate().toISOString()).calendar()}</i> : null}
+
+              <i className="material-icons"> add_box</i>
+              <i> {item.created_by_user_id} {moment(item.createdDate.toDate().toISOString()).calendar()}</i>
+              <br />
+              
+              {item.archived ? <i><i className="material-icons">playlist_add_check</i> {item.archived_by} {moment(item.archived_at.toDate().toISOString()).calendar()}</i> : null}
 
             </Card.Text>
           </Card.Footer>
